@@ -1,10 +1,10 @@
 import React from "react";
 
-function RoomOverview() {
+function RoomOverview(props) {
     return (
         <div>
             <div className="overView_description">
-                <p>Here you can see an overview of all the rooms of "this room type"</p>
+                <p>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</p>
                 <p>For now the page is not showing real data, so we don't know if the room is booked or not</p>
             </div>
             <div className="overView_content">
