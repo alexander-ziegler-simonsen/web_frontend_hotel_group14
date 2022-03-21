@@ -1,24 +1,54 @@
-import logo from '../assets/logo.svg';
-import './App.css';
+import Header from '../component/Header';
+import Main from '../component/Main';
+import Basket from '../component/bookingProgress/Basket';
+import roomData from '../roomData';
+import { useState } from 'react';
 
 function App() {
+  const { rooms } = roomData;
+  const [basketItems, setBasketItems] = useState([]);
+
+  const addToBasket = (room) => {
+    const isOnBasket = basketItems.find((x) => x.id === room.id);
+    if (!isOnBasket) {
+      setBasketItems([...basketItems, {...room, quantity: 1}]);
+    } else {
+      setBasketItems(
+          basketItems.map((x) =>
+              x.id === room.id ? {...isOnBasket, quantity: isOnBasket.quantity + 1} : x
+          )
+      );
+    }
+  };
+
+  const removeFromBasket = (room) => {
+    const isOnBasket = basketItems.find((x) => x.id === room.id);
+    switch (isOnBasket.quantity) {
+      case 1:
+        setBasketItems(basketItems.filter((x) => x.id !== room.id));
+        break;
+      default:
+        setBasketItems(
+            basketItems.map((x) =>
+                x.id === room.id ? {...isOnBasket, quantity: isOnBasket.quantity - 1} : x
+            )
+        );
+        break;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Header countBasketItems={basketItems.length}></Header>
+        <div className="row">
+          <Main rooms={rooms} addToBasket={addToBasket}></Main>
+          <Basket
+              basketItems={basketItems}
+              addToBasket={addToBasket}
+              removeFromBasket={removeFromBasket}
+          ></Basket>
+        </div>
+      </div>
   );
 }
 
