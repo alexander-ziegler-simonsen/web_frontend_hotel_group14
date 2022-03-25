@@ -1,33 +1,44 @@
 import React from "react";
+import { Grid, Container,  Typography, Button,
+    CardActions, Card, CardContent, Box } from "@mui/material"
+
+import RoomView from "../component/RoomView"
 
 function RoomOverview(props) {
     return (
-        <div>
-            <div className="overView_description">
-                <p>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</p>
-                <p>For now the page is not showing real data, so we don't know if the room is booked or not</p>
-            </div>
-            <div className="overView_content">
-                <div className="room">
-                    <p>A001 - 2 beds - 200$ pr night</p>
-                </div>
-                <div className="room">
-                    <p>A002 - 2 beds - 200$ pr night</p>
-                </div>
-                <div className="room">
-                    <p>A003 - 2 beds - 200$ pr night</p>
-                </div>
-                <div className="room">
-                    <p>B021 - 2 beds - 200$ pr night</p>
-                </div>
-                <div className="room">
-                    <p>B031 - 2 beds - 200$ pr night</p>
-                </div>
-                <div className="room">
-                    <p>C026 - 2 beds - 200$ pr night</p>
-                </div>
-            </div>
-        </div>
+        <Container>
+            
+                <Typography>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</Typography>
+                <Typography>For now the page is not showing real data, so we don't know if the room is booked or not</Typography>
+                
+                    <Grid sx={{flexGrow:1}} 
+                    container>
+                        
+                        <grid item xs key={1} >
+                            <RoomView />
+                        </grid>
+                        <grid item xs key={2} >
+                            <RoomView />
+                        </grid>
+                        <grid item xs key={3} >
+                            <RoomView />
+                        </grid>
+                        <grid item xs key={4} >
+                            <RoomView />
+                        </grid>
+                        <grid item xs key={5} >
+                            <RoomView />
+                        </grid>
+                        <grid item xs key={6} >
+                            <RoomView />
+                        </grid>
+                        <grid item xs key={7} >
+                            <RoomView />
+                        </grid>
+
+                    </Grid>
+            
+        </Container>
     )
 }
 
