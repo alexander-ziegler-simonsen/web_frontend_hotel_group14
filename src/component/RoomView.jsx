@@ -6,12 +6,13 @@ function RoomView(props) {
         
             <Paper elevation={3} sx={{width: 300, heigh:'auto', backgroundColor: 'white', padding: 2, margin: 1}}>    
                 
-            <Typography variant="h1" sx={{fontSize: 18, fontWeight: 'bold', marginBottom: 1}}>header</Typography>
-            <Typography variant="p">this is 10% luck, 20% something else, 30% of things I have forgotten</Typography>
+            <Typography variant="h1" sx={{fontSize: 18, fontWeight: 'bold', marginBottom: 1}}>
+                {props.header}</Typography>
+            <Typography variant="p">{props.bodyText}</Typography>
             
             <Stack direction="row" spacing={2} style={{justifyContent: 'center', marginTop: 8}}>
-                <item><Button variant="contained">order now</Button></item>
-                <item><Button variant="outlined">add to list</Button>  </item>
+                <item><Button variant="contained">order now {props.orderNow}</Button></item>
+                <item><Button variant="outlined">add to list {props.addToList}</Button>  </item>
             </Stack>
             
             
