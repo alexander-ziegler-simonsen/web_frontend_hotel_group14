@@ -1,8 +1,13 @@
 import logo from '../assets/logo.svg';
 import './App.css';
+import RoomPage from '../component/Room/RoomPage'
 
 function App() {
   return (
+    <div>
+      <RoomPage></RoomPage>
+    </div>
+    /*
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -19,6 +24,7 @@ function App() {
         </a>
       </header>
     </div>
+    */
   );
 }
 
