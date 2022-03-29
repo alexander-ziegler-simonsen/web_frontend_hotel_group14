@@ -1,6 +1,6 @@
 import logo from '../assets/logo.svg';
 import './App.css';
-import RoomPage from '../component/Room/RoomPage'
+import RoomPage from '../component/RoomPage/RoomPage'
 
 function App() {
   return (

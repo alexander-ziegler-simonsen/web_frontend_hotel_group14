@@ -24,7 +24,6 @@ const luxuriousRoom = {
       roomUrl: 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/194702399.jpg?k=f1479caa27cfdc80362d5c9b4f04c53ffedf2366ca83fee6239ca4470b9a746e&o=',
       height: 300,
       width: 300
-    
     }
   }
 

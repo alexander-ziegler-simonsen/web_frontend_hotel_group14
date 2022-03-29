@@ -13,7 +13,6 @@ function Room(props) {
   );
 }
 
-
 export default Room;
 
 
