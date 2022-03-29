@@ -5,7 +5,9 @@ function RoomInfo(props) {
         <div className="RoomInfo">
             <RoomPicture user={props.user}/>
             <div className="RoomName">
-                {props.user.name}
+                <h1>
+                    {props.user.name}
+                </h1>
             </div>
         </div>
     );

@@ -7,7 +7,9 @@ function Room(props) {
     <div className="Room">
       <RoomInfo user={props.author} />
       <div className="RoomDescription">
-        {props.text}
+        <p>
+          {props.text}
+        </p>
       </div>
     </div>
   );
