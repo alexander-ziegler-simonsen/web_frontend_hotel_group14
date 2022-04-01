@@ -1,41 +1,39 @@
 import React from "react";
-import { Grid, Container,  Typography } from "@mui/material"
-
+// import { Grid, Container,  Typography } from "@mui/material"
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import RoomView from "../component/RoomView"
 
 function RoomOverview(props) {
     return (
-        <Container>
-            
-                <Typography>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</Typography>
-                <Typography>For now the page is not showing real data, so we don't know if the room is booked or not</Typography>
-                
-                    <Grid sx={{flexGrow:1}} container>
-                        
-                        <grid item xs key={1} >
-                            <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
-                        <grid item xs key={2} >
-                        <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
-                        <grid item xs key={3} >
-                        <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
-                        <grid item xs key={4} >
-                        <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
-                        <grid item xs key={5} >
-                        <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
-                        <grid item xs key={6} >
-                        <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
-                        <grid item xs key={7} >
-                        <RoomView header="2 rooms, one bed?" bodyText="body text goes here" orderNow="" addToList="" />
-                        </grid>
+        <Container fluid={true}>
+            <row>
+            <p>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</p>
+                <p>For now the page is not showing real data, so we don't know if the room is booked or not</p>
+            </row>
+            <row>
+                <Col  >
+                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                </Col>
+                <Col  >
+                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                </Col>
+                <Col  >
+                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                </Col>
 
-                    </Grid>
-            
+                <Col >
+                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                </Col>
+                <Col  >
+                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                </Col>
+                <Col >
+                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                </Col>
+
+            </row>
         </Container>
     )
 }

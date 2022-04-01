@@ -1,14 +1,30 @@
 import React from "react";
 import { Typography, Button, Stack, Paper } from "@mui/material"
+import Card from 'react-bootstrap/Card'
+
+
+
 
 function RoomView(props) {
     return (
+        <>
+        
+        <Card>
+            <Card.body>
+                <Card.Title>
+                    <h1>{props.header}</h1>
+                </Card.Title>
+                <Card.Text>
+                    {props.bodyText}
+                </Card.Text>
+            </Card.body>
+        </Card>
         
             <Paper elevation={3} sx={{width: 300, heigh:'auto', backgroundColor: 'white', padding: 2, margin: 1}}>    
                 
             <Typography variant="h1" sx={{fontSize: 18, fontWeight: 'bold', marginBottom: 1}}>
                 {props.header}</Typography>
-            <Typography variant="p">{props.bodyText}</Typography>
+            <Typography variant="p"></Typography>
             
             <Stack direction="row" spacing={2} style={{justifyContent: 'center', marginTop: 8}}>
                 <item><Button variant="contained">order now {props.orderNow}</Button></item>
@@ -18,7 +34,7 @@ function RoomView(props) {
             
             </Paper>
                 
-        
+            </>
     )
 }
 
