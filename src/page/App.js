@@ -2,14 +2,17 @@ import logo from '../assets/logo.svg';
 import './App.css';
 
 // import my page
-import RoomOveriew from './RoomOverview.jsx'
+import RoomOveriew from './RoomOverview.jsx';
+import LoginPage from './LoginPage';
 
 
 function App() {
   return (
     <div className="App">
       
-      <RoomOveriew name="batman" time="5" />
+      <p>text goes here</p>
+      <LoginPage />
+      {/* <RoomOveriew name="batman" time="5" /> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
