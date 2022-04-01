@@ -1,12 +1,30 @@
 import logo from '../assets/logo.svg';
 import './App.css';
 import RoomPage from '../component/RoomPage/RoomPage'
+import FrontPage from '../component/FrontPage/FrontPage'
+import { Switch } from 'react-native-web';
+import { Route, Router } from 'react-router-dom';
+
+
+
 
 function App() {
   return (
-    <div>
-      <RoomPage></RoomPage>
-    </div>
+
+      <FrontPage></FrontPage>
+
+      /*
+      <div className="Front page">
+        <FrontPage></FrontPage>
+      </div>
+
+      <div className="Room page">
+        <RoomPage></RoomPage>
+      </div>
+  */
+
+      
+
     /*
     <div className="App">
       <header className="App-header">

@@ -1,10 +1,9 @@
 function FrontPicture(props){
     return (
-        <img className="RoomPicture"
+        <img className="FrontPicture"
         src={props.user.roomUrl}
         width={props.user.width}
         height={props.user.height}
-        alt={props.user.name}
         />
     );
 }
