@@ -1,40 +1,30 @@
 import React from "react";
-import { Typography, Button, Stack, Paper } from "@mui/material"
+
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Stack from 'react-bootstrap/Stack'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-
+// THIS FILE IS MADE BY:
+// Alexander Ziegler, S181100
 
 function RoomView(props) {
     return (
-        <>
-        
-        <Card>
-            <Card.body>
-                <Card.Title>
-                    <h1>{props.header}</h1>
-                </Card.Title>
-                <Card.Text>
-                    {props.bodyText}
-                </Card.Text>
-            </Card.body>
+        <Card className="border" style={{width: '18rem', marginBottom: '25px'}}>
+            <Card.Body>
+                <Card.Title><h3>{props.header}</h3></Card.Title>
+                <Card.Text>{props.bodyText}</Card.Text>
+                
+                <Stack gap={5} direction="horizontal">
+                    <div><Button variant='primary'>order now {props.orderNow}</Button></div>
+                    <div><Button variant='light'>add to list {props.addToList}</Button></div>
+                </Stack>
+
+
+            </Card.Body>
         </Card>
-        
-            <Paper elevation={3} sx={{width: 300, heigh:'auto', backgroundColor: 'white', padding: 2, margin: 1}}>    
-                
-            <Typography variant="h1" sx={{fontSize: 18, fontWeight: 'bold', marginBottom: 1}}>
-                {props.header}</Typography>
-            <Typography variant="p"></Typography>
-            
-            <Stack direction="row" spacing={2} style={{justifyContent: 'center', marginTop: 8}}>
-                <item><Button variant="contained">order now {props.orderNow}</Button></item>
-                <item><Button variant="outlined">add to list {props.addToList}</Button>  </item>
-            </Stack>
-            
-            
-            </Paper>
-                
-            </>
+
     )
 }
 

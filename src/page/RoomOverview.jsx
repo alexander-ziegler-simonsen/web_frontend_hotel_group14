@@ -5,35 +5,44 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import RoomView from "../component/RoomView"
 
+// THIS FILE IS MADE BY:
+// Alexander Ziegler, S181100
+
 function RoomOverview(props) {
     return (
         <Container fluid={true}>
-            <row>
-            <p>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</p>
+            <Row>
+                <p>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</p>
                 <p>For now the page is not showing real data, so we don't know if the room is booked or not</p>
-            </row>
-            <row>
-                <Col  >
-                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+            </Row>
+            <Row>
+                <Col>
+                    <RoomView header="Window view, 2 beds" bodyText="good for those in the friend zone" orderNow="" addToList="" />
                 </Col>
-                <Col  >
-                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                <Col>
+                    <RoomView header="lots of ceiling windows, 3 beds" bodyText="look at the sky" orderNow="" addToList="" />
                 </Col>
-                <Col  >
-                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                <Col>
+                    <RoomView header="jacuzzi, 1 big bed" bodyText="one does not simply copy memes" orderNow="" addToList="" />
                 </Col>
-
-                <Col >
-                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                <Col>
+                    <RoomView header="no windows, 1 bed" bodyText="but it was aliens" orderNow="" addToList="" />
                 </Col>
-                <Col  >
-                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+            </Row>
+            <Row>
+                <Col>
+                    <RoomView header="0 beds, just a floor" bodyText="then I took an arrow to the knee" orderNow="" addToList="" />
                 </Col>
-                <Col >
-                    <RoomView header="this is a header text" bodyText="here we have all the body text" orderNow="" addToList="" />
+                <Col>
+                    <RoomView header="no floor, just the void" bodyText="is that you cj ?" orderNow="" addToList="" />
                 </Col>
-
-            </row>
+                <Col>
+                    <RoomView header="You don't want to know" bodyText="one number 9" orderNow="" addToList="" />
+                </Col>
+                <Col>
+                    <RoomView header="'we didn't listen'" bodyText="here we go again" orderNow="" addToList="" />
+                </Col>
+            </Row>
         </Container>
     )
 }
