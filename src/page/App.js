@@ -6,7 +6,7 @@ import { Switch } from 'react-native-web';
 import { Route, Router } from 'react-router-dom';
 
 
-
+//import BookingPage from "./BookingPage";
 
 // import my page
 import RoomOveriew from './RoomOverview.jsx';
@@ -17,7 +17,7 @@ function App() {
   return (
 
       <FrontPage />
-  );
+  )
 }
 
 export default App;
