@@ -1,7 +1,11 @@
 import React from 'react';
-import Rooms from '../component/bookingProgress/Rooms';
+import Rooms from './Rooms';
 
-export default function FrontPage(props) {
+/**
+ * Author: Azmi Uslu (s185736)
+ **/
+
+export default function Main(props) {
     const { rooms, addToBasket } = props;
 
     return (

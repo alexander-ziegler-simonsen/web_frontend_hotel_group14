@@ -1,3 +1,7 @@
+/**
+ * Author: Azmi Uslu (s185736)
+ **/
+
 const roomData = {
 
     /*Details about the rooms..*/

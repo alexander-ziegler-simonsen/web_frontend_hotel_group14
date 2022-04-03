@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Author: Azmi Uslu (s185736)
+ **/
+
 export default function Header(props) {
 
     return (
