@@ -1,8 +1,12 @@
-import Header from '../component/Header';
-import Main from '../component/Main';
+import Header from '../component/bookingProgress/Header';
+import Main from '../component/bookingProgress/Main';
 import Basket from '../component/bookingProgress/Basket';
 import roomData from '../roomData';
 import { useState } from 'react';
+
+/**
+ * Author: Azmi Uslu (s185736)
+ **/
 
 function BookingPage() {
     const { rooms } = roomData;

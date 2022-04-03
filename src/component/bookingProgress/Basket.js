@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Author: Azmi Uslu (s185736)
+ **/
+
 export default function Basket(props) {
     const { basketItems, addToBasket, removeFromBasket } = props;
     const roomPrice = basketItems.reduce(function (a, x) {
