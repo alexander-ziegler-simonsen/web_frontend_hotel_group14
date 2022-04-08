@@ -12,7 +12,7 @@ function RoomOverview(props) {
     return (
         <Container fluid={true}>
             <Row>
-                <p>Here you can see an overview of all the rooms of "this room type" - this is props value = {props.name} and {props.time}</p>
+                <p>Here you can see an overview of all the rooms of "this room type" - showing some props values | name = {props.name} | time = {props.time}</p>
                 <p>For now the page is not showing real data, so we don't know if the room is booked or not</p>
             </Row>
             <Row>

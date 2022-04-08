@@ -13,6 +13,7 @@ import RoomPage from "../RoomPage/RoomPage";
 import BookingPage from "../../page/BookingPage";
 import MyBookings from "../../component/myBooking/MyBookings";
 import LoginPage from "../../page/LoginPage";
+import RoomOverview from "../../page/RoomOverview";
 //import Page from "./Page";
 
 /**
@@ -53,6 +54,9 @@ function FrontPage(){
                         <li>
                             <Link to="/forms">Forms</Link>
                         </li>
+                        <li>
+                            <Link to="/roomoverview">RoomOverview</Link>
+                        </li>
                     </ul>
                 </nav>
                 <Switch>
@@ -76,6 +80,9 @@ function FrontPage(){
                     </Route>
                     <Route path={"/forms"}>
                         <LoginPage />
+                    </Route>
+                    <Route path={"/roomoverview"}>
+                        <RoomOverview name="batman" time="14:00" />
                     </Route>
                     <Route path={"/"}>
                         <Home />
