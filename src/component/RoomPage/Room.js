@@ -1,6 +1,9 @@
 import React from "react";
 import RoomInfo from './RoomInfo';
 
+/**
+ * Author: Sammy Chauhan (S191181)
+ **/
 
 function Room(props) {
   return (

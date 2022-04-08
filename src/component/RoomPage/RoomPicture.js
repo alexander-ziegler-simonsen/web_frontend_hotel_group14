@@ -1,4 +1,8 @@
 
+/**
+ * Author: Sammy Chauhan (S191181)
+ **/
+
 function RoomPicture(props){
     return (
         <img className="RoomPicture"

@@ -1,5 +1,9 @@
 import RoomPicture from './RoomPicture';
 
+/**
+ * Author: Sammy Chauhan (S191181)
+ **/
+
 function RoomInfo(props) {
     return (
         <div className="RoomInfo">
