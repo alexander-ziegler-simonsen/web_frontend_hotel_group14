@@ -11,6 +11,10 @@ import {
 import RoomPage from "../RoomPage/RoomPage";
 //import Page from "./Page";
 
+/**
+ * Author: Sammy Chauhan (S191181)
+ **/
+
 //Switch kan bruges med ældre version af react-router-dom.
 //npm uninstall react-router-dom
 //npm install react-router-dom@5.2.0

@@ -1,6 +1,10 @@
 import ReactDOM from 'react-dom';
 import Room from './Room'
 
+/**
+ * Author: Sammy Chauhan (S191181)
+ **/
+
 function RoomPage(){
     return( 
         ReactDOM.render(
