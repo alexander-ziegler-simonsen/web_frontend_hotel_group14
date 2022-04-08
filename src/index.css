@@ -32,7 +32,13 @@ a {
 .BasketDetailsRoom {
   flex: 1;
 }
+.BookingsDetailsRoom {
+  flex: 1;
+}
 .RoomDetailColumn {
+  flex: 2;
+}
+.OrderDetailColumn {
   flex: 2;
 }
 .blockBehind {
