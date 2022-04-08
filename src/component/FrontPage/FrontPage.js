@@ -55,7 +55,7 @@ function FrontPage(){
                             <Link to="/forms">Forms</Link>
                         </li>
                         <li>
-                            <Link to="/roomoverview">RoomOverview</Link>
+                            <Link to="/roomoverview">Room_overview</Link>
                         </li>
                     </ul>
                 </nav>
@@ -79,9 +79,11 @@ function FrontPage(){
                         <Users />
                     </Route>
                     <Route path={"/forms"}>
+                        <h2>Forms</h2>
                         <LoginPage />
                     </Route>
                     <Route path={"/roomoverview"}>
+                        <h2>RoomOverview</h2>
                         <RoomOverview name="batman" time="14:00" />
                     </Route>
                     <Route path={"/"}>
@@ -110,10 +112,6 @@ function About() {
 
 function Users() {
     return <h2>Users</h2>;
-}
-
-function Forms() {
-    return <h2>Forms</h2>
 }
 
 const frontPage = {
