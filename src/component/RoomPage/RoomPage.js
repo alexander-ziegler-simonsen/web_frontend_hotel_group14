@@ -11,8 +11,7 @@ function RoomPage(){
           <Room className="First room"
           text={luxuriousRoom.text}
           author={luxuriousRoom.author} /> 
-          </div>,
-          document.getElementById('root')
+          </div>
     );
 }
 
