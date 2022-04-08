@@ -11,6 +11,7 @@ import {
 
 import RoomPage from "../RoomPage/RoomPage";
 import BookingPage from "../../page/BookingPage";
+import MyBookings from "../../component/myBooking/MyBookings";
 //import Page from "./Page";
 
 //Switch kan bruges med ældre version af react-router-dom.
@@ -36,6 +37,9 @@ function FrontPage(){
                             <Link to="/bookingpage">Book Now</Link>
                         </li>
                         <li>
+                            <Link to="/mybookings">My Bookings</Link>
+                        </li>
+                        <li>
                             <Link to="/about">About</Link>
                         </li>
                         <li>
@@ -53,6 +57,9 @@ function FrontPage(){
                 </Route>
                     <Route path={"/bookingpage"}>
                         <BookingPage />
+                    </Route>
+                    <Route path={"/mybookings"}>
+                        <MyBookings />
                     </Route>
                 <Route path={"/about"}>
                     <About />
