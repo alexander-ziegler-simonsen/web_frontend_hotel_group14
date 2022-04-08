@@ -8,7 +8,7 @@ import { Route, Router } from 'react-router-dom';
 
 //import BookingPage from "./BookingPage";
 import BookingPage from "./BookingPage";
-import BookingsPage from './BookingsPage';
+import MyBookings from "../component/myBooking/MyBookings";
 
 // import my page
 import RoomOveriew from './RoomOverview.jsx';
