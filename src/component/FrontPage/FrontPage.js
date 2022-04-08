@@ -12,6 +12,7 @@ import {
 import RoomPage from "../RoomPage/RoomPage";
 import BookingPage from "../../page/BookingPage";
 import MyBookings from "../../component/myBooking/MyBookings";
+import LoginPage from "../../page/LoginPage";
 //import Page from "./Page";
 
 /**
@@ -49,7 +50,9 @@ function FrontPage(){
                         <li>
                             <Link to="/users">Users</Link>
                         </li>
-
+                        <li>
+                            <Link to="/forms">Forms</Link>
+                        </li>
                     </ul>
                 </nav>
                 <Switch>
@@ -71,10 +74,12 @@ function FrontPage(){
                     <Route path={"/users"}>
                         <Users />
                     </Route>
+                    <Route path={"/forms"}>
+                        <LoginPage />
+                    </Route>
                     <Route path={"/"}>
                         <Home />
                     </Route>
-
                 </Switch>
             </div>
         </Router>
@@ -100,6 +105,9 @@ function Users() {
     return <h2>Users</h2>;
 }
 
+function Forms() {
+    return <h2>Forms</h2>
+}
 
 const frontPage = {
     text: 'This is an example of our luxurious room.',
