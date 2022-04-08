@@ -6,15 +6,13 @@ import Room from './Room'
  **/
 
 function RoomPage(){
-    return( 
-        ReactDOM.render(
-            <div className="Rooms">
-            <Room className="First room"
-            text={luxuriousRoom.text}
-            author={luxuriousRoom.author} /> 
-            </div>,
-            document.getElementById('root')
-        )
+    return(   
+          <div className="Rooms">
+          <Room className="First room"
+          text={luxuriousRoom.text}
+          author={luxuriousRoom.author} /> 
+          </div>,
+          document.getElementById('root')
     );
 }
 
