@@ -1,8 +1,8 @@
 import React from "react";
 
-import ForgotPasswordForm from "../component/ForgotPasswordForm";
-import LoginForm from "../component/LoginForm";
-import NewUserForm from "../component/NewUserForm";
+import ForgotPasswordForm from "../component/forms/ForgotPasswordForm";
+import LoginForm from "../component/forms/LoginForm";
+import NewUserForm from "../component/forms/NewUserForm";
 
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
