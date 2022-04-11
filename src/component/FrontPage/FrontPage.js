@@ -31,12 +31,13 @@ function FrontPage(){
     return(
         <Router>
             <div style={{backgroundColor: "silver"}}>
-                <div class="header">
+                <div className="header">
                     <h1><Link to="/">A.S.A Hotel</Link></h1>
                 </div> 
                 <nav>
+                    <div className="body">
                     <ul>
-                        <li>
+                        <li >
                             <Link class="headerlinks" to="/frontpage">Page</Link>
                         </li>
                         <li>
@@ -57,11 +58,11 @@ function FrontPage(){
                         <li>
                             <Link to="/roomoverview">Room_overview</Link>
                         </li>   
-                        <li class="login">
+                        <li className="body-login">
                             <Link to="/forms">Forms</Link>
                         </li>
                     </ul>
-
+                    </div>
                 </nav>
                 
                 <Switch>
