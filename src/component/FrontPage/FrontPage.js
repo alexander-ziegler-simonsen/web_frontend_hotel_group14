@@ -11,10 +11,13 @@ import {
 
 import RoomPage from "../RoomPage/RoomPage";
 import BookingPage from "../../page/BookingPage";
-import MyBookings from "../../component/myBooking/MyBookings";
+import MyBookings from "../myBooking/MyBookings";
 import LoginPage from "../../page/LoginPage";
 import RoomOverview from "../../page/RoomOverview";
-//import Page from "./Page";
+// css styling fra https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_right
+import './FrontPage.css';
+
+
 
 /**
  * Author: Sammy Chauhan (S191181)
@@ -27,14 +30,15 @@ import RoomOverview from "../../page/RoomOverview";
 function FrontPage(){
     return(
         <Router>
-            <div>
+            <div style={{backgroundColor: "silver"}}>
+                <div className="header">
+                    <h1><Link to="/">A.S.A Hotel</Link></h1>
+                </div> 
                 <nav>
+                    <div className="body">
                     <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/frontpage">Page</Link>
+                        <li >
+                            <Link class="headerlinks" to="/frontpage">Page</Link>
                         </li>
                         <li>
                             <Link to="/luxuriousroom">RoomPage</Link>
@@ -52,13 +56,15 @@ function FrontPage(){
                             <Link to="/users">Users</Link>
                         </li>
                         <li>
+                            <Link to="/roomoverview">Room_overview</Link>
+                        </li>   
+                        <li className="body-login">
                             <Link to="/forms">Forms</Link>
                         </li>
-                        <li>
-                            <Link to="/roomoverview">Room_overview</Link>
-                        </li>
                     </ul>
+                    </div>
                 </nav>
+                
                 <Switch>
                     <Route path={"/frontpage"}>
                         <Page />
