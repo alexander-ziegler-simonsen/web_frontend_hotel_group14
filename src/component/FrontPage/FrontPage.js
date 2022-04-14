@@ -59,7 +59,7 @@ function FrontPage(){
                             <Link to="/roomoverview">Room_overview</Link>
                         </li>   
                         <li className="body-login">
-                            <Link to="/forms">Forms</Link>
+                            <Link to="/forms">Login</Link>
                         </li>
                     </ul>
                     </div>
