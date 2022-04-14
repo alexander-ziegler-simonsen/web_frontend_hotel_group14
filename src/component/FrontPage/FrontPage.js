@@ -50,14 +50,15 @@ function FrontPage(){
                             <Link to="/mybookings">My Bookings</Link>
                         </li>
                         <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/users">Users</Link>
-                        </li>
-                        <li>
                             <Link to="/roomoverview">Room_overview</Link>
-                        </li>   
+                        </li>
+                        <li>
+                            <Link to="/about">About Us</Link>
+                        </li>
+                        <li>
+                            <Link to="/contact">Contact Us</Link>
+                        </li>
+                        
                         <li className="body-login">
                             <Link to="/forms">Forms</Link>
                         </li>
@@ -81,7 +82,7 @@ function FrontPage(){
                     <Route path={"/about"}>
                         <About />
                     </Route>
-                    <Route path={"/users"}>
+                    <Route path={"/contact"}>
                         <Users />
                     </Route>
                     <Route path={"/forms"}>
@@ -117,7 +118,7 @@ function About() {
 }
 
 function Users() {
-    return <h2>Users</h2>;
+    return <h2>Contact</h2>;
 }
 
 const frontPage = {
