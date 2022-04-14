@@ -9,8 +9,12 @@ export default function MyBookings() {
 
     return (
         <div>
+            <header className="blockBehind row center">
+                <div><h1>My Bookings</h1></div>
+            </header>
             <div className="blockBehind BookingsDetailsRoom">
-                <h2>My Orders</h2>
+                <h2>Previous Bookings</h2>
+                <div className="blockBehindOrderSummary BookingsDetailsRoomFrame">
                 <div className="OrderDetailColumn">
                     Order 1: Budget Room, booked 01-04-2022.
                     <div></div>
@@ -18,6 +22,7 @@ export default function MyBookings() {
                     <div></div>
                     Order 3: Luxury Room, booked 01-04-2018.
                     <div></div>
+                </div>
                 </div>
             </div>
         </div>

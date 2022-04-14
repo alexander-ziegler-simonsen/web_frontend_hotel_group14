@@ -38,6 +38,13 @@ a {
 .RoomDetailColumn {
   flex: 2;
 }
+.BookingsDetailsRoom {
+  flex: 1;
+}
+.BookingsDetailsRoomFrame {
+  flex: 1;
+}
+>>>>>>> Stashed changes
 .OrderDetailColumn {
   flex: 2;
 }
@@ -47,11 +54,18 @@ a {
   margin: 0.5rem;
   border-radius: 0.3rem;
 }
+.blockBehindOrderSummary {
+  background-color: #cce0d5;
+  padding: 2rem;
+  margin: 0.5rem;
+  border-radius: 0.3rem;
+  width: 50%;
+}
 .text-right {
   text-align: right;
 }
 img.size {
-  max-height: 6rem;
+  max-height: 9rem;
 }
 button {
   font-size: 0.8rem;
@@ -60,7 +74,7 @@ button {
   border-radius: 0.3rem;
   border: 0.15rem solid;
   background-color: #ffffff;
-  width: 100%;
+  width: 45%;
   cursor: pointer;
 }
 button.basket {
