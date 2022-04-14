@@ -26,3 +26,6 @@ yarn-error.log*
 /.idea
 .idea
 .idea/
+
+# firebase keys
+firebaseKey.json
