@@ -4,7 +4,7 @@ import './index.css';
 import App from './page/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, HashRouter } from "react-router-dom";
-import FrontPage from './component/FrontPage/FrontPage';
+
 import { Provider } from 'react-redux'; // redix
 import { initializeApp } from "firebase/app"; // firebase
 
