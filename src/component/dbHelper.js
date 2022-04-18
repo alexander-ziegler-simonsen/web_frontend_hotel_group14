@@ -1,9 +1,15 @@
-import { getDatebase, ref, set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
 
 // this is not a component
+
+// read:
+// add: https://firebase.google.com/docs/database/web/read-and-write#basic_write
+// delete:
+// update:
+
 
 // booking CRUD
 function dbBookingRead(){
@@ -18,8 +24,13 @@ function dbBookingDelete(){
      
 }
 
-function dbBookingCreate(){
-     
+function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
+    const db = getDatabase();
+    set(ref(db, 'booking/'), {
+        dateFrom: inputDateFrom,
+        dateTo: inputDateTo,
+        fk_room_id: fkRoomId
+    });
 }
 
 
@@ -36,8 +47,13 @@ function dbBookingOccupDelete(){
      
 }
 
-function dbBookingOccupCreate(){
-     
+function dbBookingOccupCreate(inputCountOfAdult, inputCountOfChild, fkBookingId){
+    const db = getDatabase();
+    set(ref(db, 'booking_occupants/'), {
+        countOfAdult: inputCountOfAdult,
+        countOfChild: inputCountOfChild,
+        fk_booking_id: fkBookingId
+    });
 }
 
 // floor CRUD
@@ -53,8 +69,11 @@ function dbFloorDelete(){
      
 }
 
-function dbFloorCreate(){
-     
+function dbFloorCreate(inputName){
+    const db = getDatabase();
+    set(ref(db, 'floor/'), {
+        name: inputName
+    });
 }
 
 // room CRUD
@@ -70,8 +89,13 @@ function dbRoomDelete(){
      
 }
 
-function dbRoomCreate(){
-     
+function dbRoomCreate(fkFloorId, fkRoomType, roomName){
+    const db = getDatabase();
+    set(ref(db, 'room/'), {
+        fk_floor_id: fkFloorId,
+        fk_room_type: fkRoomType,
+        room_name: roomName
+    });
 }
 
 // user CRUD
@@ -87,8 +111,12 @@ function dbUserDelete(){
      
 }
 
-function dbUserCreate(){
-     
+function dbUserCreate(inputName, inputPhone){
+    const db = getDatabase();
+    set(ref(db, 'user/'), {
+        name: inputName,
+        phone: inputPhone
+    });
 }
 
 // room_type CRUD
@@ -104,8 +132,11 @@ function dbRoomTypeDelete(){
      
 }
 
-function dbRoomTypeCreate(){
-     
+function dbRoomTypeCreate(inputName){
+    const db = getDatabase();
+    set(ref(db, 'room_type/'), {
+        name: inputName
+    });
 }
 
 // master_booking CRUD
@@ -121,8 +152,12 @@ function dbMasterBookDelete(){
      
 }
 
-function dbMasterBookCreate(){
-     
+function dbMasterBookCreate(fkBookingId, fkUserId){
+    const db = getDatabase();
+    set(ref(db, 'master_booking/'), {
+        fk_booking_id: fkBookingId,
+        fk_user_id: fkUserId
+    });
 }
 
 // water_view CRUD
@@ -138,8 +173,11 @@ function dbWaterViewDelete(){
      
 }
 
-function dbWaterViewCreate(){
-     
+function dbWaterViewCreate(fkRoomId){
+    const db = getDatabase();
+    set(ref(db, 'water_view/'), {
+        fk_room_id: fkRoomId
+    });
 }
 
 // extra_billing CRUD
@@ -155,6 +193,11 @@ function dbExtraBillDelete(){
      
 }
 
-function dbExtraBillCreate(){
-     
+function dbExtraBillCreate(fkBookingId, inputPrice, inputTopic){
+    const db = getDatabase();
+    set(ref(db, 'extra_billing/'), {
+        fk_booking_id: fkBookingId,
+        price: inputPrice,
+        topic: inputTopic
+    });
 }
