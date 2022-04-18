@@ -14,8 +14,6 @@ import Modal from "react-bootstrap/Modal";
 function LoginPage(props) {
     // https://react-bootstrap.github.io/components/modal/
     // https://reactjs.org/docs/hooks-state.html 
-    
-    // if show is true, then we can't open any more popups, before show = false (not sure if that could be done any ways)
 
 
     const [showLogin, setLogin] = useState(false);
