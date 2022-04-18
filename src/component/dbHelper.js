@@ -7,8 +7,8 @@ import { getDatabase, ref, set } from "firebase/database";
 
 // read:
 // add: https://firebase.google.com/docs/database/web/read-and-write#basic_write
-// delete:
-// update:
+// delete: 
+// update:https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document - set it to "web v-8"
 
 
 // booking CRUD
@@ -16,8 +16,19 @@ function dbBookingRead(){
 
 }
 
-function dbBookingUpdate(){
-     
+function dbBookingUpdate(bookingId, inputDateFrom, inputDateTo, fkRoomId){
+     const db = getDatabase();
+     db.collection('booking').doc(bookingId).set({
+        dateFrom: inputDateFrom,
+        dateTo: inputDateTo,
+        fk_room_id: fkRoomId
+     })
+     .then(() => {
+        console.log("document successfully written");
+     })
+     .catch((error) => {
+        console.error("error writing document: ", error);
+     });
 }
 
 function dbBookingDelete(){
@@ -39,8 +50,19 @@ function dbBookingOccupRead(){
 
 }
 
-function dbBookingOccupUpdate(){
-     
+function dbBookingOccupUpdate(bookingOccupId, inputCountOfAdult, inputCountOfChild, fkBookingId){
+    const db = getDatabase();
+    db.collection('booking_occupants').doc(bookingOccupId).set({
+        countOfAdult: inputCountOfAdult,
+        countOfChild: inputCountOfChild,
+        fk_booking_id: fkBookingId
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbBookingOccupDelete(){
@@ -61,8 +83,17 @@ function dbFloorRead(){
 
 }
 
-function dbFloorUpdate(){
-     
+function dbFloorUpdate(floorId, inputName){
+    const db = getDatabase();
+    db.collection('booking_occupants').doc(floorId).set({
+        name: inputName
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbFloorDelete(){
@@ -81,8 +112,19 @@ function dbRoomRead(){
 
 }
 
-function dbRoomUpdate(){
-     
+function dbRoomUpdate(roomId, fkFloorId, fkRoomType, roomName){
+    const db = getDatabase();
+    db.collection('room').doc(roomId).set({
+        fk_floor_id: fkFloorId,
+        fk_room_type: fkRoomType,
+        room_name: roomName
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbRoomDelete(){
@@ -103,8 +145,18 @@ function dbUserRead(){
 
 }
 
-function dbUserUpdate(){
-     
+function dbUserUpdate(userId, inputName, inputPhone){
+    const db = getDatabase();
+    db.collection('user').doc(userId).set({
+        name: inputName,
+        phone: inputPhone
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbUserDelete(){
@@ -124,8 +176,17 @@ function dbRoomTypeRead(){
 
 }
 
-function dbRoomTypeUpdate(){
-     
+function dbRoomTypeUpdate(roomTypeId, inputName){
+    const db = getDatabase();
+    db.collection('room_type').doc(roomTypeId).set({
+        name: inputName
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbRoomTypeDelete(){
@@ -144,8 +205,18 @@ function dbMasterBookRead(){
 
 }
 
-function dbMasterBookUpdate(){
-     
+function dbMasterBookUpdate(masterBookId, fkBookingId, fkUserId){
+    const db = getDatabase();
+    db.collection('master_booking').doc(masterBookId).set({
+        fk_booking_id: fkBookingId,
+        fk_user_id: fkUserId
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbMasterBookDelete(){
@@ -165,8 +236,17 @@ function dbWaterViewRead(){
 
 }
 
-function dbWaterViewUpdate(){
-     
+function dbWaterViewUpdate(waterViewId, fkRoomId){
+    const db = getDatabase();
+    db.collection('water_view').doc(waterViewId).set({
+        fk_room_id: fkRoomId
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbWaterViewDelete(){
@@ -185,8 +265,19 @@ function dbExtraBillRead(){
 
 }
 
-function dbExtraBillUpdate(){
-     
+function dbExtraBillUpdate(extraId, fkBookingId, inputPrice, inputTopic){
+    const db = getDatabase();
+    db.collection('extra_billing').doc(extraId).set({
+        fk_booking_id: fkBookingId,
+        price: inputPrice,
+        topic: inputTopic
+    })
+    .then(() => {
+       console.log("document successfully written");
+    })
+    .catch((error) => {
+       console.error("error writing document: ", error);
+    });
 }
 
 function dbExtraBillDelete(){
