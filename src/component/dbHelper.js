@@ -7,7 +7,7 @@ import { getDatabase, ref, set } from "firebase/database";
 
 // read:
 // add: https://firebase.google.com/docs/database/web/read-and-write#basic_write
-// delete: 
+// delete: https://firebase.google.com/docs/firestore/manage-data/delete-data#delete_documents
 // update:https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document - set it to "web v-8"
 
 
@@ -31,8 +31,14 @@ function dbBookingUpdate(bookingId, inputDateFrom, inputDateTo, fkRoomId){
      });
 }
 
-function dbBookingDelete(){
-     
+function dbBookingDelete(bookingId){
+     const db = getDatabase();
+     db.collection('booking').doc(bookingId).delete().then(() => {
+        console.log("document successfully deleted!");
+     })
+     .catch((error) => {
+        console.error("error removing document: ", error);
+     });
 }
 
 function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
@@ -47,7 +53,6 @@ function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
 
 // booking_occupants CRUD
 function dbBookingOccupRead(){
-
 }
 
 function dbBookingOccupUpdate(bookingOccupId, inputCountOfAdult, inputCountOfChild, fkBookingId){
@@ -65,8 +70,14 @@ function dbBookingOccupUpdate(bookingOccupId, inputCountOfAdult, inputCountOfChi
     });
 }
 
-function dbBookingOccupDelete(){
-     
+function dbBookingOccupDelete(bookingOccupId){
+    const db = getDatabase();
+    db.collection('booking_occupants').doc(bookingOccupId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbBookingOccupCreate(inputCountOfAdult, inputCountOfChild, fkBookingId){
@@ -85,7 +96,7 @@ function dbFloorRead(){
 
 function dbFloorUpdate(floorId, inputName){
     const db = getDatabase();
-    db.collection('booking_occupants').doc(floorId).set({
+    db.collection('floor').doc(floorId).set({
         name: inputName
     })
     .then(() => {
@@ -96,8 +107,14 @@ function dbFloorUpdate(floorId, inputName){
     });
 }
 
-function dbFloorDelete(){
-     
+function dbFloorDelete(floorId){
+    const db = getDatabase();
+    db.collection('floor').doc(floorId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbFloorCreate(inputName){
@@ -127,8 +144,14 @@ function dbRoomUpdate(roomId, fkFloorId, fkRoomType, roomName){
     });
 }
 
-function dbRoomDelete(){
-     
+function dbRoomDelete(roomId){
+    const db = getDatabase();
+    db.collection('room').doc(roomId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbRoomCreate(fkFloorId, fkRoomType, roomName){
@@ -159,8 +182,16 @@ function dbUserUpdate(userId, inputName, inputPhone){
     });
 }
 
-function dbUserDelete(){
-     
+function dbUserDelete(userId){
+    const db = getDatabase();
+    db.collection('user').doc(userId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
+
+    // TODO: we also need to delete the user, not just the userdata from our database
 }
 
 function dbUserCreate(inputName, inputPhone){
@@ -189,8 +220,14 @@ function dbRoomTypeUpdate(roomTypeId, inputName){
     });
 }
 
-function dbRoomTypeDelete(){
-     
+function dbRoomTypeDelete(roomTypeId){
+    const db = getDatabase();
+    db.collection('room_type').doc(roomTypeId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbRoomTypeCreate(inputName){
@@ -219,8 +256,14 @@ function dbMasterBookUpdate(masterBookId, fkBookingId, fkUserId){
     });
 }
 
-function dbMasterBookDelete(){
-     
+function dbMasterBookDelete(masterBookId){
+    const db = getDatabase();
+    db.collection('master_booking').doc(masterBookId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbMasterBookCreate(fkBookingId, fkUserId){
@@ -249,8 +292,14 @@ function dbWaterViewUpdate(waterViewId, fkRoomId){
     });
 }
 
-function dbWaterViewDelete(){
-     
+function dbWaterViewDelete(waterViewId){
+    const db = getDatabase();
+    db.collection('water_view').doc(waterViewId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbWaterViewCreate(fkRoomId){
@@ -280,8 +329,14 @@ function dbExtraBillUpdate(extraId, fkBookingId, inputPrice, inputTopic){
     });
 }
 
-function dbExtraBillDelete(){
-     
+function dbExtraBillDelete(extraId){
+    const db = getDatabase();
+    db.collection('extra_billing').doc(extraId).delete().then(() => {
+       console.log("document successfully deleted!");
+    })
+    .catch((error) => {
+       console.error("error removing document: ", error);
+    });
 }
 
 function dbExtraBillCreate(fkBookingId, inputPrice, inputTopic){
