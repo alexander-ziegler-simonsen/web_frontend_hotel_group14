@@ -5,8 +5,8 @@ import { getDatabase, ref, set } from "firebase/database";
 
 // this is not a component
 
-// read:
-// add: https://firebase.google.com/docs/database/web/read-and-write#basic_write
+// read: 
+// create: https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document
 // delete: https://firebase.google.com/docs/firestore/manage-data/delete-data#delete_documents
 // update:https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document - set it to "web v-8"
 
@@ -43,11 +43,18 @@ function dbBookingDelete(bookingId){
 
 function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
     const db = getDatabase();
-    set(ref(db, 'booking/'), {
+    db.collection("booking").add({
         dateFrom: inputDateFrom,
         dateTo: inputDateTo,
-        fk_room_id: fkRoomId
+        fk_room_id: fkRoomId})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
+
+
 }
 
 
@@ -82,10 +89,15 @@ function dbBookingOccupDelete(bookingOccupId){
 
 function dbBookingOccupCreate(inputCountOfAdult, inputCountOfChild, fkBookingId){
     const db = getDatabase();
-    set(ref(db, 'booking_occupants/'), {
+    db.collection("booking_occupants").add({
         countOfAdult: inputCountOfAdult,
         countOfChild: inputCountOfChild,
-        fk_booking_id: fkBookingId
+        fk_booking_id: fkBookingId})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -119,8 +131,13 @@ function dbFloorDelete(floorId){
 
 function dbFloorCreate(inputName){
     const db = getDatabase();
-    set(ref(db, 'floor/'), {
-        name: inputName
+    db.collection("floor").add({
+        name: inputName})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -156,10 +173,15 @@ function dbRoomDelete(roomId){
 
 function dbRoomCreate(fkFloorId, fkRoomType, roomName){
     const db = getDatabase();
-    set(ref(db, 'room/'), {
+    db.collection("room").add({
         fk_floor_id: fkFloorId,
         fk_room_type: fkRoomType,
-        room_name: roomName
+        room_name: roomName})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -196,9 +218,14 @@ function dbUserDelete(userId){
 
 function dbUserCreate(inputName, inputPhone){
     const db = getDatabase();
-    set(ref(db, 'user/'), {
+    db.collection("user").add({
         name: inputName,
-        phone: inputPhone
+        phone: inputPhone})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -232,8 +259,13 @@ function dbRoomTypeDelete(roomTypeId){
 
 function dbRoomTypeCreate(inputName){
     const db = getDatabase();
-    set(ref(db, 'room_type/'), {
-        name: inputName
+    db.collection("room_type").add({
+        name: inputName})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -268,9 +300,14 @@ function dbMasterBookDelete(masterBookId){
 
 function dbMasterBookCreate(fkBookingId, fkUserId){
     const db = getDatabase();
-    set(ref(db, 'master_booking/'), {
+    db.collection("master_booking").add({
         fk_booking_id: fkBookingId,
-        fk_user_id: fkUserId
+        fk_user_id: fkUserId})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -304,8 +341,13 @@ function dbWaterViewDelete(waterViewId){
 
 function dbWaterViewCreate(fkRoomId){
     const db = getDatabase();
-    set(ref(db, 'water_view/'), {
-        fk_room_id: fkRoomId
+    db.collection("water_view").add({
+        fk_room_id: fkRoomId})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
 
@@ -341,9 +383,14 @@ function dbExtraBillDelete(extraId){
 
 function dbExtraBillCreate(fkBookingId, inputPrice, inputTopic){
     const db = getDatabase();
-    set(ref(db, 'extra_billing/'), {
+    db.collection("extra_billing").add({
         fk_booking_id: fkBookingId,
         price: inputPrice,
-        topic: inputTopic
+        topic: inputTopic})
+    .then((docRef) => {
+        console.log("document written with ID:", docRef.id);
+    })
+    .catch((error) => {
+        console.error("error adding document: ", error);
     });
 }
