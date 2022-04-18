@@ -4,10 +4,12 @@
     background: #1abc9c;
     font-size: 30px;
 }
+
 .header a {
     color: white;
     text-decoration: none;
 }
+
 .header a:hover {
     color: black;
 }
@@ -28,6 +30,7 @@
 .body li {
     background-color: #1abc9c;
 }
+
 .body li a {
     float: left;
     border-right: 1px solid #bbb;
@@ -42,10 +45,7 @@
     background-color: #111;
 }
 
-.body-login{
-    float:right;
+.body-login {
+    float: right;
     /*background-color: #1abc9c;*/
 }
-
-
-

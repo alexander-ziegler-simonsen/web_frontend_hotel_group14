@@ -55,7 +55,7 @@ function NavigationBar() {
                             <li>
                                 <Link to="/contact">Contact Us</Link>
                             </li>
-                            <li className="body-login" background-color="white">
+                            <li className="body-login">
                                 <Link to="/mybookings">My Bookings</Link>
                             </li>
                             <li className="body-login">
@@ -66,7 +66,6 @@ function NavigationBar() {
                 </nav>
 
                 <Switch>
-
                     <Route path={"/luxuriousroom"}>
                         <RoomPage />
                     </Route>
