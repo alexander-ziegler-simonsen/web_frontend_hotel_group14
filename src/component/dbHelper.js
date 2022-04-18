@@ -5,7 +5,8 @@ import { getDatabase, ref, set } from "firebase/database";
 
 // this is not a component
 
-// read: 
+// read all: https://firebase.google.com/docs/firestore/query-data/get-data#get_all_documents_in_a_collection
+// read one: 
 // create: https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document
 // delete: https://firebase.google.com/docs/firestore/manage-data/delete-data#delete_documents
 // update:https://firebase.google.com/docs/firestore/manage-data/add-data#set_a_document - set it to "web v-8"
@@ -13,6 +14,30 @@ import { getDatabase, ref, set } from "firebase/database";
 
 // booking CRUD
 function dbBookingRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
+
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("booking").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                dateFrom: temp("dateFrom"),
+                dateTo: temp("dateTo"),
+                fk_room_id: temp("fk_room_id")})
+        })
+    });
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
+}
+
+function dbBookingReadOne(){
 
 }
 
@@ -60,6 +85,27 @@ function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
 
 // booking_occupants CRUD
 function dbBookingOccupRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
+
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("booking_occupants").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                countOfAdult: temp("countOfAdult"),
+                countOfChild: temp("countOfChild"),
+                fk_booking_id: temp("fk_booking_id")})
+        });
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbBookingOccupUpdate(bookingOccupId, inputCountOfAdult, inputCountOfChild, fkBookingId){
@@ -103,7 +149,25 @@ function dbBookingOccupCreate(inputCountOfAdult, inputCountOfChild, fkBookingId)
 
 // floor CRUD
 function dbFloorRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("floor").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                name: temp("name")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbFloorUpdate(floorId, inputName){
@@ -143,7 +207,27 @@ function dbFloorCreate(inputName){
 
 // room CRUD
 function dbRoomRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("room").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                fk_floor_id: temp("fk_floor_id"),
+                fk_room_type: temp("fk_room_type"),
+                room_name: temp("room_name")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbRoomUpdate(roomId, fkFloorId, fkRoomType, roomName){
@@ -187,7 +271,26 @@ function dbRoomCreate(fkFloorId, fkRoomType, roomName){
 
 // user CRUD
 function dbUserRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("user").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                name: temp("name"),
+                phone: temp("phone")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbUserUpdate(userId, inputName, inputPhone){
@@ -231,7 +334,25 @@ function dbUserCreate(inputName, inputPhone){
 
 // room_type CRUD
 function dbRoomTypeRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("room_type").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                name: temp("name")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbRoomTypeUpdate(roomTypeId, inputName){
@@ -271,7 +392,26 @@ function dbRoomTypeCreate(inputName){
 
 // master_booking CRUD
 function dbMasterBookRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("master_booking").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                fk_booking_id: temp("fk_booking_id"),
+                fk_user_id: temp("fk_user_id")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbMasterBookUpdate(masterBookId, fkBookingId, fkUserId){
@@ -313,7 +453,25 @@ function dbMasterBookCreate(fkBookingId, fkUserId){
 
 // water_view CRUD
 function dbWaterViewRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("water_view").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                fk_room_id: temp("fk_room_id")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbWaterViewUpdate(waterViewId, fkRoomId){
@@ -353,7 +511,27 @@ function dbWaterViewCreate(fkRoomId){
 
 // extra_billing CRUD
 function dbExtraBillRead(){
+    // TODO: maybe just load this into the redux store, or return as a list of json objs
 
+    let output = [];
+
+    const db = getDatabase();
+    db.collection("extra_billing").get()
+    .then((querySnapshot) => 
+    {
+        querySnapshot.forEach((doc) => {
+            var temp = doc.data();
+
+            output.push({
+                id: doc.id,
+                fk_booking_id: temp("fk_booking_id"),
+                price: temp("price"),
+                topic: temp("topic")})
+        })
+    });    
+    
+    //TODO: check if return gets runed, before the get is done
+    return output;
 }
 
 function dbExtraBillUpdate(extraId, fkBookingId, inputPrice, inputTopic){
