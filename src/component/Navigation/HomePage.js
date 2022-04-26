@@ -3,41 +3,51 @@ import {
   Link
 } from "react-router-dom";
 import Picture from './Picture.js'
+import { budget, standard, business, luxury } from '../RoomPage/RoomPage.js'
+
 
 /**
- * Author: Sammy Chauhan (S191181)
+ * Author: Sammy Chauhan (s191181)
  **/
 
 function HomePage(props) {
   return (
     <div className="rooms">
-      <Link to={"/luxuriousroom"}>
+      <div className="budget">
+        <Link to={"/budget"}>
+          <Picture
+            name={budget.author.name}
+            image={budget.author.image}
+            height={budget.author.height}
+            width={budget.author.width} />
+        </Link>
+
+      </div>
+
+      <div>
+        hej
+      </div>
+
+      <Link to={"/standard"}>
         <Picture
-          name={room1.name}
-          roomUrl={room1.roomUrl}
-          height={room1.height}
-          width={room1.width} />
+          name={standard.author.name}
+          image={standard.author.image}
+          height={standard.author.height}
+          width={standard.author.width} />
       </Link>
-      <Link to={"/luxuriousroom"}>
+      <Link to={"/business"}>
         <Picture
-          name={room2.name}
-          roomUrl={room2.roomUrl}
-          height={room2.height}
-          width={room2.width} />
+          name={business.author.name}
+          image={business.author.image}
+          height={business.author.height}
+          width={business.author.width} />
       </Link>
-      <Link to={"/about"}>
+      <Link to={"/luxury"}>
         <Picture
-          name={room3.name}
-          roomUrl={room3.roomUrl}
-          height={room3.height}
-          width={room3.width} />
-      </Link>
-      <Link to={"/contact"}>
-        <Picture
-          name={room4.name}
-          roomUrl={room4.roomUrl}
-          height={room4.height}
-          width={room4.width} />
+          name={luxury.author.name}
+          image={luxury.author.image}
+          height={luxury.author.height}
+          width={luxury.author.width} />
       </Link>
     </div>
 
@@ -45,32 +55,6 @@ function HomePage(props) {
   );
 
 
-}
-
-const room1 = {
-  name: 'Room 1',
-  roomUrl: 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/194702399.jpg?k=f1479caa27cfdc80362d5c9b4f04c53ffedf2366ca83fee6239ca4470b9a746e&o=',
-  height: 400,
-  width: 600,
-  link: <a href="http://www.google.com"> click </a>
-}
-const room2 = {
-  name: 'Room 2',
-  roomUrl: 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/194702399.jpg?k=f1479caa27cfdc80362d5c9b4f04c53ffedf2366ca83fee6239ca4470b9a746e&o=',
-  height: 400,
-  width: 600
-}
-const room3 = {
-  name: 'Room 3',
-  roomUrl: 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/194702399.jpg?k=f1479caa27cfdc80362d5c9b4f04c53ffedf2366ca83fee6239ca4470b9a746e&o=',
-  height: 400,
-  width: 600
-}
-const room4 = {
-  name: 'Room 4',
-  roomUrl: 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/194702399.jpg?k=f1479caa27cfdc80362d5c9b4f04c53ffedf2366ca83fee6239ca4470b9a746e&o=',
-  height: 400,
-  width: 600
 }
 
 export default HomePage;

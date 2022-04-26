@@ -6,7 +6,6 @@ import {
     BrowserRouter as Router,
     Route,
     Link,
-    Routes
 } from "react-router-dom";
 
 import RoomPage from "../RoomPage/RoomPage";
@@ -16,7 +15,6 @@ import LoginPage from "../../page/LoginPage";
 import RoomOverview from "../../page/RoomOverview";
 // css styling fra https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_right
 import './NavigationBar.css';
-
 
 
 /**
@@ -40,9 +38,7 @@ function NavigationBar() {
                             <li >
                                 <Link class="headerlinks" to="/">Home</Link>
                             </li>
-                            <li>
-                                <Link to="/luxuriousroom">RoomPage</Link>
-                            </li>
+
                             <li>
                                 <Link to="/bookingpage">Book Now</Link>
                             </li>
@@ -66,9 +62,19 @@ function NavigationBar() {
                 </nav>
 
                 <Switch>
-                    <Route path={"/luxuriousroom"}>
+                    <Route path={"/budget"}>
                         <RoomPage />
                     </Route>
+                    <Route path={"/standard"}>
+                        <RoomPage />
+                    </Route>
+                    <Route path={"/business"}>
+                        <RoomPage />
+                    </Route>
+                    <Route path={"/luxury"}>
+                        <RoomPage />
+                    </Route>
+
                     <Route path={"/bookingpage"}>
                         <BookingPage />
                     </Route>
@@ -106,11 +112,6 @@ function About() {
 
 function Users() {
     return <h2>Contact</h2>;
-}
-
-const frontPage = {
-    text: 'This is an example of our luxurious room.',
-    picture: 'https://q-xx.bstatic.com/xdata/images/hotel/max1024x768/194702399.jpg?k=f1479caa27cfdc80362d5c9b4f04c53ffedf2366ca83fee6239ca4470b9a746e&o=',
 }
 
 export default NavigationBar;

@@ -6,7 +6,7 @@
 function Picture(props) {
     return (
         <img
-            src={props.roomUrl}
+            src={props.image}
             width={props.width}
             height={props.height}
             alt={props.name}
