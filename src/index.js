@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
 
-import { Provider } from 'react-redux'; // redix
+//import { Provider } from 'react-redux'; // redix
 import { initializeApp } from "firebase/app"; // firebase
 import { getDatabase } from 'firebase/database'; // firebase
 

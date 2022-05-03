@@ -4,7 +4,7 @@ import ForgotPasswordForm from "../component/forms/ForgotPasswordForm";
 import LoginForm from "../component/forms/LoginForm";
 import NewUserForm from "../component/forms/NewUserForm";
 import Button from "react-bootstrap/Button";
-import Stack from "react-bootstrap/Stack";
+//import Stack from "react-bootstrap/Stack";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
@@ -24,11 +24,11 @@ function LoginPage(props) {
         <div>
             pick one of the 3 options, then a form will come up.
 
-            <Stack direction="horizontal" gap={5}>
+            {/*<Stack direction="horizontal" gap={5}>*/}
                 <Button onClick={() => setLogin(!showLogin)}>login</Button>
                 <Button onClick={() => setPass(!showPass)}>forgot password</Button>
                 <Button onClick={() => setNew(!showNew)}>make new user</Button>
-            </Stack>
+            {/*</Stack>*/}
 
             {/* login */}
             <Modal variant="primary" show={showLogin} onClick={() => setLogin(!showLogin)}>

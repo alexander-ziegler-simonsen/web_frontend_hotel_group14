@@ -2,6 +2,9 @@ import Budget from './assets/Images/Room/Budget.png';
 import Standard from './assets/Images/Room/Standard.jpg';
 import Business from './assets/Images/Room/Business.jpg';
 import Luxury from './assets/Images/Room/Luxury.jpg'
+import React, {
+    Component
+} from 'react';
 
 
 /**

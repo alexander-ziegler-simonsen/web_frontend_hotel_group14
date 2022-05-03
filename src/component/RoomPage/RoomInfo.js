@@ -1,5 +1,7 @@
 import RoomPicture from './RoomPicture';
-
+import React, {
+    Component
+} from 'react';
 /**
  * Author: Sammy Chauhan (S191181)
  **/
