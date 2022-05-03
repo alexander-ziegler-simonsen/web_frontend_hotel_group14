@@ -1,6 +1,6 @@
 import logo from '../assets/logo.svg';
 import './App.css';
-import NavigationBar from '../component/Navigation/NavigationBar'
+import NavigationBar from '../component/Navigation/NavigationBar';
 
 //import BookingPage from "./BookingPage";
 import BookingPage from "./BookingPage";
@@ -12,7 +12,6 @@ import LoginPage from './LoginPage';
 
 function App() {
   return (
-
     <NavigationBar />
   )
 }

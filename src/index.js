@@ -4,6 +4,7 @@ import './index.css';
 import App from './page/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, HashRouter } from "react-router-dom";
+import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux'; // redix
 import { initializeApp } from "firebase/app"; // firebase
@@ -30,23 +31,19 @@ const firebaseConfig = {
 //   r_types: [[31, "budget"], [32, "normal"], [33, "business"] ,[34, "VIP"]],
 // }
 
-const app = initializeApp(firebaseConfig);
+/*const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 console.log(db)
-
+*/
 
 ReactDOM.render(
+    <BrowserRouter basename="/asa">
+        <App/>
+    </BrowserRouter>
+    ,
+    document.getElementById('root'));
 
-
-  <React.StrictMode>
-    <App/>
-
-  </React.StrictMode>,
- 
-  document.getElementById('root')
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();

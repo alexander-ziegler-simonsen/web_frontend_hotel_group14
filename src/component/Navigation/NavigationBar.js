@@ -9,8 +9,7 @@ import {
 } from "react-router-dom";
 
 import RoomPage from "../RoomPage/RoomPage";
-import BookingPage from "../../page/BookingPage";
-import MyBookings from "../myBooking/MyBookings";
+import {Booking} from '../../component/booking/Booking';
 import LoginPage from "../../page/LoginPage";
 import RoomOverview from "../../page/RoomOverview";
 // css styling fra https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_right
@@ -40,9 +39,6 @@ function NavigationBar() {
                             </li>
 
                             <li>
-                                <Link to="/bookingpage">Book Now</Link>
-                            </li>
-                            <li>
                                 <Link to="/roomoverview">Room_overview</Link>
                             </li>
                             <li>
@@ -52,7 +48,7 @@ function NavigationBar() {
                                 <Link to="/contact">Contact Us</Link>
                             </li>
                             <li className="body-login">
-                                <Link to="/mybookings">My Bookings</Link>
+                                <Link to="/booking">Booking Portal</Link>
                             </li>
                             <li className="body-login">
                                 <Link to="/forms">Login</Link>
@@ -75,9 +71,6 @@ function NavigationBar() {
                         <RoomPage />
                     </Route>
 
-                    <Route path={"/bookingpage"}>
-                        <BookingPage />
-                    </Route>
                     <Route path={"/about"}>
                         <About />
                     </Route>
@@ -88,8 +81,8 @@ function NavigationBar() {
                         <h2>RoomOverview</h2>
                         <RoomOverview name="batman" time="14:00" />
                     </Route>
-                    <Route path={"/mybookings"}>
-                        <MyBookings />
+                    <Route path={"/booking"}>
+                        <Booking />
                     </Route>
                     <Route path={"/forms"}>
                         <h2>Forms</h2>

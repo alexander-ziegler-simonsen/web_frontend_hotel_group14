@@ -1,10 +1,8 @@
 import Room from './Room'
 import './RoomPage.css'
 import roomData from '../../roomData';
-
-import {
-  Route,
-} from "react-router-dom";
+import React, { Component } from 'react';
+import { Route, Routes } from "react-router-dom";
 
 /**
  * Author: Sammy Chauhan (S191181)
