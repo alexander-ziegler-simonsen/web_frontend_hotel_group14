@@ -4,7 +4,6 @@ import RoomPage from '../component/RoomPage/RoomPage'
 import FrontPage from '../component/FrontPage/FrontPage'
 import { Switch } from 'react-native-web';
 import { Route, Router } from 'react-router-dom';
-import OrderList from '../component/myBooking/OrderList';
 
 //import BookingPage from "./BookingPage";
 import BookingPage from "./BookingPage";
