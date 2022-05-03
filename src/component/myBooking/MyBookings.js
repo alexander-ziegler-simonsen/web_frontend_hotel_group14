@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './index.css';
 /**
  * Author: Azmi Uslu (s185736)
  * Status: still alot to do..
@@ -9,9 +9,9 @@ export default function MyBookings() {
 
     return (
         <div>
-            <header className="blockBehind row center">
+            <div className="blockBehind row center">
                 <div><h1>My Bookings</h1></div>
-            </header>
+            </div>
             <div className="blockBehind BookingsDetailsRoom">
                 <h2>Previous Bookings</h2>
                 <div className="blockBehindOrderSummary BookingsDetailsRoomFrame">

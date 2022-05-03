@@ -1,4 +1,4 @@
-import Header from '../component/bookingProgress/Header';
+
 import Main from '../component/bookingProgress/Main';
 import Basket from '../component/bookingProgress/Basket';
 import roomData from '../roomData';
@@ -43,7 +43,7 @@ function BookingPage() {
 
     return (
         <div className="App">
-            <Header countBasketItems={basketItems.length}></Header>
+            <div countBasketItems={basketItems.length}></div>
             <div className="row">
                 <Main rooms={rooms} addToBasket={addToBasket}></Main>
                 <Basket

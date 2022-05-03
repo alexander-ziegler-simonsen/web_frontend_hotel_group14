@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './index.css';
 /**
  * Author: Azmi Uslu (s185736)
  **/
@@ -10,7 +10,7 @@ export default function Basket(props) {
         return a + x.quantity * x.price;
     }, 0);
     const totalPrice = roomPrice;
-    
+
     return (
         <div className="blockBehind BasketDetailsRoom">
             <h2>Basket</h2>

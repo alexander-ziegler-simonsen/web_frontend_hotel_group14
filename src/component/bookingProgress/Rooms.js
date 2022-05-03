@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './index.css';
 /**
  * Author: Azmi Uslu (s185736)
  **/
