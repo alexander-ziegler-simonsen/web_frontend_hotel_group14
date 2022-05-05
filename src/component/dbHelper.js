@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app"; // firebase
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, getFirestore } from "firebase/firestore";
 import { getDatabase, ref, set } from "firebase/database";
-
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
 
@@ -28,6 +27,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 console.log(db)
+const firestore = getFirestore(app);
 
 // booking CRUD
 export function dbBookingRead(){
@@ -227,20 +227,14 @@ export async function dbRoomRead(){
     // TODO: maybe just load this into the redux store, or return as a list of json objs
 
     let output = [];
-
-    const db = getDatabase();
-    const querySnapshot = await getDocs(collection(db, "room"));
     
-    querySnapshot.forEach((doc) => {
-        var temp = doc.data();
+    const resultRef = collection(firestore, "room")
+    const result = await (await getDocs(resultRef)).forEach(room => {
+        output.push({id: room.id, ...room.data()})
+    })
 
-        output.push({
-            id: doc.id,
-            fk_floor_id: temp("fk_floor_id"),
-            fk_room_type: temp("fk_room_type"),
-            room_name: temp("room_name")})
-    })  
-    
+    console.log("ziegler",output);
+
     //TODO: check if return gets runed, before the get is done
     return output;
 }
