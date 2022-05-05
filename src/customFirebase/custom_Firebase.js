@@ -1,4 +1,5 @@
-import firebase from 'firebase';
+import { initializeApp } from "firebase/app"; // firebase
+import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc, getFirestore } from "firebase/firestore";
 
 /**
  * Author: Azmi Uslu (s185736)

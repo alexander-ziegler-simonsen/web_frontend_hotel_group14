@@ -4,13 +4,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import RoomView from "../component/RoomView"
 
-import {dbRoomRead } from "../component/dbHelper";
+// import {dbRoomRead } from "../component/dbHelper";
 
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
 
-const data = dbRoomRead()
-console.log("testing firebase here", data)
+// const data = dbRoomRead()
+// console.log("testing firebase here", data)
 
 function RoomOverview(props) {
     return (
