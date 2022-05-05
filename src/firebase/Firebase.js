@@ -7,7 +7,7 @@ import firebase from 'firebase';
  */
 
 const config = {
-  apiKey: process.env.API_KEY || 'AIzaSyAjeOXGtppEL81rmGxHw5jQ4y9Ivk2UcrI',
+  apiKey: process.env.API_KEY || '',
   authDomain: process.env.AUTH_DOMAIN || 'hotel-website-30596.firebaseapp.com',
   databaseURL: process.env.DATABASE_URL || 'https://hotel-website-30596.firebaseio.com',
   projectId: process.env.PROJECT_ID || 'hotel-website-30596',

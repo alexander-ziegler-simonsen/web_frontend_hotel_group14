@@ -20,11 +20,9 @@ function dbBookingRead(){
 
     const db = getDatabase();
     db.collection("booking").get()
-    .then((querySnapshot) => 
-    {
+    .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             var temp = doc.data();
-
             output.push({
                 id: doc.id,
                 dateFrom: temp("dateFrom"),

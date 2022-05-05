@@ -7,6 +7,8 @@ import {AppProvider} from "../../AppContext/AppContext";
 import {EditRoom} from "../editRoom/EditRoom";
 import {OrderNumberID} from "../bookingMisc/OrderNumberID";
 import {Room} from "../../models/Room";
+//import {getDatabase} from "firebase/empty-import";
+//import { getDatabase, ref, set } from "firebase/database";
 
 /**
  * Author: Azmi Uslu (s185736)
@@ -24,7 +26,7 @@ export class Booking extends React.Component {
 			announcement: ''
 		  }
 		})
-	  }, 5000) //Once the alert announcement has been shown, it'll be dissappeared after 5 seconds.
+	  }, 5000) //Once the alert announcement has been shown, it'll be disappeared after 5 seconds.
 	};
 
   /**
@@ -59,9 +61,9 @@ export class Booking extends React.Component {
 		}, () => {
 		  if (updateRemote) {
 			const db = firebase.firestore();
-
+			 // const db = getDatabase();
 			return db
-			  .collection('rooms')
+			  .collection('room')
 			  .doc(room.id)
 			  .update(fieldsChanged)
 			  .then(() => {
