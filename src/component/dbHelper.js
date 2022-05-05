@@ -29,31 +29,21 @@ const db = getDatabase(app);
 console.log(db)
 const firestore = getFirestore(app);
 
-// booking CRUD
-export function dbBookingRead(){
+export async function dbReadAll(tableName){
     // TODO: maybe just load this into the redux store, or return as a list of json objs
 
     let output = [];
-
-    const db = getDatabase();
-    db.collection("booking").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                dateFrom: temp("dateFrom"),
-                dateTo: temp("dateTo"),
-                fk_room_id: temp("fk_room_id")})
-        })
-    });
     
+    const resultRef = collection(firestore, tableName);
+    const result = await (await getDocs(resultRef)).forEach(item => {
+        output.push({id: item.id, ...item.data()})
+    })
+
     //TODO: check if return gets runed, before the get is done
     return output;
 }
 
+// #region booking CRUD
 export function dbBookingReadOne(){
 
 }
@@ -98,33 +88,9 @@ export function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
 
 
 }
+// #endregion
 
-
-// booking_occupants CRUD
-export function dbBookingOccupRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("booking_occupants").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                countOfAdult: temp("countOfAdult"),
-                countOfChild: temp("countOfChild"),
-                fk_booking_id: temp("fk_booking_id")})
-        });
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region booking_occupants CRUD
 export function dbBookingOccupUpdate(bookingOccupId, inputCountOfAdult, inputCountOfChild, fkBookingId){
     const db = getDatabase();
     db.collection('booking_occupants').doc(bookingOccupId).set({
@@ -163,30 +129,9 @@ export function dbBookingOccupCreate(inputCountOfAdult, inputCountOfChild, fkBoo
         console.error("error adding document: ", error);
     });
 }
+// #endregion
 
-// floor CRUD
-export function dbFloorRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("floor").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                name: temp("name")})
-        })
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region floor CRUD
 export function dbFloorUpdate(floorId, inputName){
     const db = getDatabase();
     db.collection('floor').doc(floorId).set({
@@ -221,9 +166,10 @@ export function dbFloorCreate(inputName){
         console.error("error adding document: ", error);
     });
 }
+// #endregion
 
-// room CRUD
-export async function dbRoomRead(){
+// #region room CRUD
+export async function dbRoomRead(tableName){
     // TODO: maybe just load this into the redux store, or return as a list of json objs
 
     let output = [];
@@ -232,8 +178,6 @@ export async function dbRoomRead(){
     const result = await (await getDocs(resultRef)).forEach(room => {
         output.push({id: room.id, ...room.data()})
     })
-
-    console.log("ziegler",output);
 
     //TODO: check if return gets runed, before the get is done
     return output;
@@ -277,31 +221,9 @@ export function dbRoomCreate(fkFloorId, fkRoomType, roomName){
         console.error("error adding document: ", error);
     });
 }
+// #endregion 
 
-// user CRUD
-export function dbUserRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("user").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                name: temp("name"),
-                phone: temp("phone")})
-        })
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region user CRUD
 export function dbUserUpdate(userId, inputName, inputPhone){
     const db = getDatabase();
     db.collection('user').doc(userId).set({
@@ -340,30 +262,9 @@ export function dbUserCreate(inputName, inputPhone){
         console.error("error adding document: ", error);
     });
 }
+// #endregion 
 
-// room_type CRUD
-export function dbRoomTypeRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("room_type").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                name: temp("name")})
-        })
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region room_type CRUD
 export function dbRoomTypeUpdate(roomTypeId, inputName){
     const db = getDatabase();
     db.collection('room_type').doc(roomTypeId).set({
@@ -398,31 +299,9 @@ export function dbRoomTypeCreate(inputName){
         console.error("error adding document: ", error);
     });
 }
+// #endregion
 
-// master_booking CRUD
-export function dbMasterBookRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("master_booking").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                fk_booking_id: temp("fk_booking_id"),
-                fk_user_id: temp("fk_user_id")})
-        })
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region master_booking CRUD
 export function dbMasterBookUpdate(masterBookId, fkBookingId, fkUserId){
     const db = getDatabase();
     db.collection('master_booking').doc(masterBookId).set({
@@ -459,30 +338,9 @@ export function dbMasterBookCreate(fkBookingId, fkUserId){
         console.error("error adding document: ", error);
     });
 }
+// #endregion
 
-// water_view CRUD
-export function dbWaterViewRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("water_view").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                fk_room_id: temp("fk_room_id")})
-        })
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region water_view CRUD
 export function dbWaterViewUpdate(waterViewId, fkRoomId){
     const db = getDatabase();
     db.collection('water_view').doc(waterViewId).set({
@@ -517,32 +375,9 @@ export function dbWaterViewCreate(fkRoomId){
         console.error("error adding document: ", error);
     });
 }
+// #endregion
 
-// extra_billing CRUD
-export function dbExtraBillRead(){
-    // TODO: maybe just load this into the redux store, or return as a list of json objs
-
-    let output = [];
-
-    const db = getDatabase();
-    db.collection("extra_billing").get()
-    .then((querySnapshot) => 
-    {
-        querySnapshot.forEach((doc) => {
-            var temp = doc.data();
-
-            output.push({
-                id: doc.id,
-                fk_booking_id: temp("fk_booking_id"),
-                price: temp("price"),
-                topic: temp("topic")})
-        })
-    });    
-    
-    //TODO: check if return gets runed, before the get is done
-    return output;
-}
-
+// #region extra_billing CRUD
 export function dbExtraBillUpdate(extraId, fkBookingId, inputPrice, inputTopic){
     const db = getDatabase();
     db.collection('extra_billing').doc(extraId).set({
@@ -581,3 +416,4 @@ export function dbExtraBillCreate(fkBookingId, inputPrice, inputTopic){
         console.error("error adding document: ", error);
     });
 }
+// #endregion
