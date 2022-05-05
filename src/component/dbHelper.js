@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"; // firebase
-import { collection, getDocs, doc, setDoc, getFirestore } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, setDoc, getFirestore } from "firebase/firestore";
 import { getDatabase, ref, set } from "firebase/database";
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
@@ -25,7 +25,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const db = getFirestore(app);
 console.log(db)
 const firestore = getFirestore(app);
 
@@ -41,6 +41,17 @@ export async function dbReadAll(tableName){
 
     //TODO: check if return gets runed, before the get is done
     return output;
+}
+
+export async function dbCreateOne(tableName, newData)
+{    
+    const resultRef = collection(firestore, tableName);
+    const result = await addDoc(resultRef, newData);
+}
+
+export async function dbUpdateOne(tableName, itemId, newData)
+{
+    
 }
 
 // #region booking CRUD
@@ -72,22 +83,6 @@ export function dbBookingDelete(bookingId){
         console.error("error removing document: ", error);
      });
 }
-
-export function dbBookingCreate(inputDateFrom, inputDateTo, fkRoomId){
-    const db = getDatabase();
-    db.collection("booking").add({
-        dateFrom: inputDateFrom,
-        dateTo: inputDateTo,
-        fk_room_id: fkRoomId})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
-    });
-
-
-}
 // #endregion
 
 // #region booking_occupants CRUD
@@ -115,20 +110,6 @@ export function dbBookingOccupDelete(bookingOccupId){
        console.error("error removing document: ", error);
     });
 }
-
-export function dbBookingOccupCreate(inputCountOfAdult, inputCountOfChild, fkBookingId){
-    const db = getDatabase();
-    db.collection("booking_occupants").add({
-        countOfAdult: inputCountOfAdult,
-        countOfChild: inputCountOfChild,
-        fk_booking_id: fkBookingId})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
-    });
-}
 // #endregion
 
 // #region floor CRUD
@@ -152,18 +133,6 @@ export function dbFloorDelete(floorId){
     })
     .catch((error) => {
        console.error("error removing document: ", error);
-    });
-}
-
-export function dbFloorCreate(inputName){
-    const db = getDatabase();
-    db.collection("floor").add({
-        name: inputName})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
     });
 }
 // #endregion
@@ -207,20 +176,6 @@ export function dbRoomDelete(roomId){
        console.error("error removing document: ", error);
     });
 }
-
-export function dbRoomCreate(fkFloorId, fkRoomType, roomName){
-    const db = getDatabase();
-    db.collection("room").add({
-        fk_floor_id: fkFloorId,
-        fk_room_type: fkRoomType,
-        room_name: roomName})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
-    });
-}
 // #endregion 
 
 // #region user CRUD
@@ -249,19 +204,6 @@ export function dbUserDelete(userId){
 
     // TODO: we also need to delete the user, not just the userdata from our database
 }
-
-export function dbUserCreate(inputName, inputPhone){
-    const db = getDatabase();
-    db.collection("user").add({
-        name: inputName,
-        phone: inputPhone})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
-    });
-}
 // #endregion 
 
 // #region room_type CRUD
@@ -285,18 +227,6 @@ export function dbRoomTypeDelete(roomTypeId){
     })
     .catch((error) => {
        console.error("error removing document: ", error);
-    });
-}
-
-export function dbRoomTypeCreate(inputName){
-    const db = getDatabase();
-    db.collection("room_type").add({
-        name: inputName})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
     });
 }
 // #endregion
@@ -325,19 +255,6 @@ export function dbMasterBookDelete(masterBookId){
        console.error("error removing document: ", error);
     });
 }
-
-export function dbMasterBookCreate(fkBookingId, fkUserId){
-    const db = getDatabase();
-    db.collection("master_booking").add({
-        fk_booking_id: fkBookingId,
-        fk_user_id: fkUserId})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
-    });
-}
 // #endregion
 
 // #region water_view CRUD
@@ -361,18 +278,6 @@ export function dbWaterViewDelete(waterViewId){
     })
     .catch((error) => {
        console.error("error removing document: ", error);
-    });
-}
-
-export function dbWaterViewCreate(fkRoomId){
-    const db = getDatabase();
-    db.collection("water_view").add({
-        fk_room_id: fkRoomId})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
     });
 }
 // #endregion
@@ -400,20 +305,6 @@ export function dbExtraBillDelete(extraId){
     })
     .catch((error) => {
        console.error("error removing document: ", error);
-    });
-}
-
-export function dbExtraBillCreate(fkBookingId, inputPrice, inputTopic){
-    const db = getDatabase();
-    db.collection("extra_billing").add({
-        fk_booking_id: fkBookingId,
-        price: inputPrice,
-        topic: inputTopic})
-    .then((docRef) => {
-        console.log("document written with ID:", docRef.id);
-    })
-    .catch((error) => {
-        console.error("error adding document: ", error);
     });
 }
 // #endregion
