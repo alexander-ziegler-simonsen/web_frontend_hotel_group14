@@ -51,7 +51,7 @@ export async function dbUpdateOne(tableName, itemId, newData)
 {
     const resultRef = doc(db, tableName, itemId);
     const result = await updateDoc(resultRef, newData);
-    console.log("ziegler", result);
+    // console.log("ziegler", result);
 }
 
 export async function dbDeleteOne(tableName, itemId){
@@ -59,5 +59,5 @@ export async function dbDeleteOne(tableName, itemId){
     const result = await deleteDoc(resultRef).then(() => {
         console.log("item was deleted")
     });
-    console.log("ziegler", result);
+    // console.log("ziegler", result);
 }
