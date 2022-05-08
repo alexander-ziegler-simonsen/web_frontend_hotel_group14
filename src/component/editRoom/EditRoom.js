@@ -52,8 +52,8 @@ export const EditRoom = () => {
 			_bookings: room._bookings,
 			_updateOrder: room._updateOrder
 		})
-		.then((test)=> {console.log("testing zig", test)})
-		.catch((err)=> {console.log("testing zig error:", err)});
+		.then(()=> {console.log("the room booking was edited")})
+		.catch((err)=> {console.log("room booking edit error:", err)});
 
 		  editRoom(room);
 		  history.push(`/booking/goto/${room.id}`);

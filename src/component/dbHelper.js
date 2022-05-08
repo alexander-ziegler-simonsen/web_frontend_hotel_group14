@@ -55,7 +55,6 @@ export async function dbCreateOneWithId(tableName, newData, itemId)
 
 export async function dbUpdateOne(tableName, itemId, newData)
 {
-    console.log("ziegler testing,", tableName, itemId, newData);
     const resultRef = doc(db, tableName, itemId);
     const result = await updateDoc(resultRef, newData);
     // console.log("ziegler", result);
