@@ -32,7 +32,8 @@ export class Room {
 	 * @param createOrder - will be generated once the reservation is created.
 	 * @param updateOrder - will be generated once the reservation is updated.
 	 */
-	constructor(fullName, emailAddress, phoneNumber, roomTypeSelection, adultNumber, checkinDate, checkoutDate, childNumber, days, id = require('uuid/v4')(), createOrder = moment().format('DD/MM/YYYY hh:mm:ss A'), updateOrder = null) {
+	constructor(fullName, emailAddress, phoneNumber, roomTypeSelection, adultNumber, checkinDate, 
+		checkoutDate, childNumber, id, _createOrder) {
 		this._id = id;
 		this._fullName = fullName;
 		this._emailAddress = emailAddress;
@@ -42,8 +43,8 @@ export class Room {
 		this._checkinDate = checkinDate;
 		this._checkoutDate = checkoutDate;
 		this._childNumber = childNumber;
-		this._createOrder = createOrder;
-		this._updateOrder = updateOrder;
+		this._createOrder = _createOrder;
+		this._updateOrder = null;
 	}
 
 	/**

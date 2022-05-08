@@ -81,7 +81,7 @@ export class Booking extends React.Component {
 					}
 				  }, () => {
 					this.dismissNotification();
-					console.dir(err);
+					// console.log(err);
 				  })
 			})
 		  }
@@ -204,7 +204,8 @@ export class Booking extends React.Component {
 	  .then(values => {
 		this.setState(prevState => {
 			const {bookings, rooms} = prevState;
-			rooms.forEach(v => {bookings.filter(b => b.roomID === v.id)});
+			rooms.forEach(v => {
+				bookings.filter(b => b.roomID === v.id)});
 			return ({rooms})});
 	  }).catch(err => {
 		this.setState({
@@ -241,9 +242,7 @@ export class Booking extends React.Component {
 			items.forEach(element => {
 				objects.push(
 					new Room(element._fullName, element._emailAddress, element._phoneNumber, element._roomTypeSelection, 
-					element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id, 
-					element._createOrder, element._updateOrder)
-					);
+					element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id, element._createOrder));
 			});
 
 		  return ({
