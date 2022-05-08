@@ -62,7 +62,7 @@ export class Booking extends React.Component {
 		  })
 		}, () => {
 		  if (updateRemote) {
-			dbUpdateOne("room", room.id, fieldsChanged)
+			dbUpdateOne("rooms", room.id, fieldsChanged)
 			.then(() => {
 				this.setState({
 					load_indicator: false,
