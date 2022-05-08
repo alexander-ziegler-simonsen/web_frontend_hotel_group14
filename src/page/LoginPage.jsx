@@ -31,7 +31,7 @@ function LoginPage(props) {
             {/*</Stack>*/}
 
             {/* login */}
-            <Modal variant="primary" show={showLogin} onClick={() => setLogin(!showLogin)}>
+            <Modal variant="primary" show={showLogin} onHide={() => {setLogin(!showLogin)}}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login popup</Modal.Title>
                 </Modal.Header>
@@ -44,7 +44,7 @@ function LoginPage(props) {
             </Modal>
 
             {/* forgot password */}
-            <Modal variant="primary" show={showPass} onClick={() => setPass(!showPass)}>
+            <Modal variant="primary" show={showPass} onHide={() => setPass(!showPass)}>
                 <Modal.Header closeButton>
                     <Modal.Title>forgot password popup</Modal.Title>
                 </Modal.Header>
@@ -57,7 +57,7 @@ function LoginPage(props) {
             </Modal>
 
             {/* forgot password */}
-            <Modal variant="primary" show={showNew} onClick={() => setNew(!showNew)}>
+            <Modal variant="primary" show={showNew} onHide={() => setNew(!showNew)}>
                 <Modal.Header closeButton>
                     <Modal.Title>new user popup</Modal.Title>
                 </Modal.Header>
