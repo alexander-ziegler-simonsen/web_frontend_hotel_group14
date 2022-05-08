@@ -11,7 +11,6 @@ import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc, getFirestore } 
 // delete: https://youtu.be/s1frrNxq4js
 // update: https://youtu.be/Przhgs-GJ2s
 
-
 // firebase
 const keys = require('../firebaseKey.json');
 const firebaseConfig = {
@@ -24,14 +23,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 console.log(db)
 
 export async function dbReadAll(tableName){
     // TODO: maybe just load this into the redux store, or return as a list of json objs
-
     let output = [];
-    
     const resultRef = collection(db, tableName);
     const result = await (await getDocs(resultRef)).forEach(item => {
         output.push({id: item.id, ...item.data()})
