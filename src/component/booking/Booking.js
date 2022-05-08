@@ -2,13 +2,15 @@ import React from 'react';
 import {OrderSummary} from "../orderSummary/OrderSummary";
 import {Route, Switch} from 'react-router-dom';
 import {AddRoom} from "../addRoom/AddRoom";
-import {firebase} from "../../firebase/Firebase";
+// import {firebase} from "../../customFirebase/custom_Firebase";
 import {AppProvider} from "../../AppContext/AppContext";
 import {EditRoom} from "../editRoom/EditRoom";
 import {OrderNumberID} from "../bookingMisc/OrderNumberID";
 import {Room} from "../../models/Room";
 //import {getDatabase} from "firebase/empty-import";
 //import { getDatabase, ref, set } from "firebase/database";
+
+import {dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne} from "../dbHelper";
 
 /**
  * Author: Azmi Uslu (s185736)
@@ -60,33 +62,28 @@ export class Booking extends React.Component {
 		  })
 		}, () => {
 		  if (updateRemote) {
-			const db = firebase.firestore();
-			 // const db = getDatabase();
-			return db
-			  .collection('room')
-			  .doc(room.id)
-			  .update(fieldsChanged)
-			  .then(() => {
+			dbUpdateOne("room", room.id, fieldsChanged)
+			.then(() => {
 				this.setState({
-				  load_indicator: false,
-				  alert: {
-					display: true,
-					announcement: `Successfully: Room has been now updated.`
-				  }
-				}, this.dismissNotification)
-			  })
-			  .catch(err => {
+					load_indicator: false,
+					alert: {
+					  display: true,
+					  announcement: `Successfully: Room has been now updated.`
+					}
+				  }, this.dismissNotification)
+			})
+			.catch((err) => {
 				this.setState({
-				  load_indicator: false,
-				  alert: {
-					display: true,
-					announcement: `Error (${err}): Room couldn't be edited.`
-				  }
-				}, () => {
-				  this.dismissNotification();
-				  console.dir(err);
-				})
-			  })
+					load_indicator: false,
+					alert: {
+					  display: true,
+					  announcement: `Error (${err}): Room couldn't be edited.`
+					}
+				  }, () => {
+					this.dismissNotification();
+					console.dir(err);
+				  })
+			})
 		  }
 		});
 	  })
@@ -152,29 +149,25 @@ export class Booking extends React.Component {
 	  }, () => {
 		if (collectionName && collection) {
 		  if (updateRemote) {
-			const db = firebase.firestore();
-			db
-			  .collection(collectionName)
-			  .doc(object.id)
-			  .set({...object})
-			  .then(() => {
+			dbUpdateOne(collectionName, object.id, {...object})
+			.then(() => {
 				this.setState(prevState => ({
-				  load_indicator: false,
-				  alert: {
-					display: true,
-					announcement: `Successfully: ${objectType} is added and is now on the System.`
-				  }
-				}), this.dismissNotification)
-			  })
-			  .catch(err => {
+					load_indicator: false,
+					alert: {
+					  display: true,
+					  announcement: `Successfully: ${objectType} is added and is now on the System.`
+					}
+				  }), this.dismissNotification)
+			})
+			.catch(err => {
 				this.setState({
-				  load_indicator: false,
-				  alert: {
-					display: true,
-					announcement: `Error (${err.announcement}): ${objectType} Couldn't be added.`
-				  }
-				}, this.dismissNotification)
-			  })
+					load_indicator: false,
+					alert: {
+					  display: true,
+					  announcement: `Error (${err.announcement}): ${objectType} Couldn't be added.`
+					}
+				  }, this.dismissNotification)
+			})
 		  }
 		} else {
 		  this.setState({
@@ -238,34 +231,34 @@ export class Booking extends React.Component {
 	 */
   collectInformation = (information) => {
 	const formattedCollection = information.trim().toLowerCase();
-	const db = firebase.firestore();
-	return db.collection(information).get().then(querySnapshot => {
-		let data = querySnapshot.docs.map(doc => doc.data());
-		this.setState(prevState => {
-			data = data.map(object => {
-				switch (formattedCollection) {
-					case 'rooms':
-						object = new Room(object._fullName, object._emailAddress, object._phoneNumber, object._roomTypeSelection, object._adultNumber, object._checkinDate, object.checkoutDate, object._childNumber, object._id, object._createOrder, object._updateOrder);
-						break;
+	//const db = firebase.firestore();
 
-						default:
-							break;
-				}
-				return object;
+	let data = dbReadAll("rooms")
+	.then( (items) => {
+		this.setState(prevState => {
+			let objects = [];
+			
+			items.forEach(element => {
+				objects.push(
+					new Room(element._fullName, element._emailAddress, element._phoneNumber, element._roomTypeSelection, 
+					element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id, 
+					element._createOrder, element._updateOrder)
+					);
 			});
 
 		  return ({
 			load_indicator: false,
-			[information]: [...data]})
+			[information]: [...objects]})
 		}, () => {
 		})
-	  })
-	  .catch(e => {
+	})
+	.catch(e => {
 		this.setState({
-		  load_indicator: false}, () => {
-		  console.dir(e);
+			load_indicator: false}, () => {
+			console.dir(e);
 		})
-	  })
+	});
+
   };
 
   render() {
