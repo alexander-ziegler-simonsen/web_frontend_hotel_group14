@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"; // firebase
-import { collection, getDocs, addDoc, doc, deleteDoc, updateDoc, getFirestore } from "firebase/firestore";
+import { collection, getDocs, setDoc, addDoc, doc, deleteDoc, updateDoc, getFirestore } from "firebase/firestore";
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
 
@@ -47,8 +47,15 @@ export async function dbCreateOne(tableName, newData)
     const result = await addDoc(resultRef, newData);
 }
 
+export async function dbCreateOneWithId(tableName, newData, itemId)
+{    
+    const resultRef = doc(db, tableName, itemId);
+    const result = await setDoc(resultRef, newData);
+}
+
 export async function dbUpdateOne(tableName, itemId, newData)
 {
+    console.log("ziegler testing,", tableName, itemId, newData);
     const resultRef = doc(db, tableName, itemId);
     const result = await updateDoc(resultRef, newData);
     // console.log("ziegler", result);
