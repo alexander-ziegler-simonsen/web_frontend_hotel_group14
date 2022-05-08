@@ -1,46 +1,22 @@
 import React from 'react';
-import {OrderSummary} from "../orderSummary/OrderSummary";
+import {OrderSummary} from "../component/orderSummary/OrderSummary";
 import {Route, Switch} from 'react-router-dom';
-import {AddRoom} from "../addRoom/AddRoom";
-import {AppProvider} from "../../AppContext/AppContext";
-import {EditRoom} from "../editRoom/EditRoom";
-import {OrderNumberID} from "../bookingMisc/OrderNumberID";
-import {Room} from "../../models/Room";
-import { initializeApp } from "firebase/app"; // firebase
-import { getFirestore } from "firebase/firestore";
+import {AddRoom} from "../component/addRoom/AddRoom";
+// import {firebase} from "../../customFirebase/custom_Firebase";
+import {AppProvider} from "../AppContext/AppContext";
+import {EditRoom} from "../component/editRoom/EditRoom";
+import {OrderNumberID} from "../component/bookingMisc/OrderNumberID";
+import {Room} from "../component/models/Room";
+import {dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne} from "../component/dbHelper";
+
 /**
  * Author: Azmi Uslu (s185736)
  * Type: Main function of the app.
  **/
 
-const keys = require('../../firebaseKey.json');
-const firebaseConfig = {
-	apiKey: keys.apiKey,
-	authDomain: keys.authDomain,
-	databaseURL: keys.databaseURL,
-	projectId: keys.projectId,
-	storageBucket: keys.storageBucket,
-	messagingSenderId: keys.messagingSenderId,
-	appId: keys.appId
-};
-
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-console.log(db);
-
 export class Booking extends React.Component {
 	constructor(props) {
 		super(props);
-		this.dismissNotification = () => {
-			setTimeout(() => {
-				this.setState({
-					alert: {
-						display: false,
-						announcement: ''
-					}
-				})
-			}, 5000) //Once the alert announcement has been shown, it'll be dissappeared after 5 seconds.
-		};
 
 		/**
 		 * Following is updating the state and also the firebase..
@@ -73,30 +49,15 @@ export class Booking extends React.Component {
 					})
 				}, () => {
 					if (updateRemote) {
-
-						return db
-							.collection('rooms')
-							.doc(room.id)
-							.update(fieldsChanged)
+						dbUpdateOne("rooms", room.id, fieldsChanged)
 							.then(() => {
 								this.setState({
 									load_indicator: false,
-									alert: {
-										display: true,
-										announcement: `Successfully: Room has been now updated.`
-									}
-								}, this.dismissNotification)
+								})
 							})
-							.catch(err => {
+							.catch((err) => {
 								this.setState({
 									load_indicator: false,
-									alert: {
-										display: true,
-										announcement: `Error (${err}): Room couldn't be edited.`
-									}
-								}, () => {
-									this.dismissNotification();
-									console.dir(err);
 								})
 							})
 					}
@@ -104,18 +65,79 @@ export class Booking extends React.Component {
 			})
 		};
 
+		/**
+		 *
+		 * @param objectType - The room type.
+		 * @param object
+		 * @param refreshRemoteD - this is not obligatory, you'll have the opportunity to get updated the database remote.
+		 */
+		this.addRoom = (objectType, object, updateRemote = true) => {
+			let collectionName, collection;
+
+			switch (objectType.trim().toLowerCase()) {
+				case 'room':
+					collectionName = 'rooms';
+					break;
+
+				default:
+					break;
+			}
+			let selectedRoom, selectedRoomIndex;
+			this.setState(prevState => {
+				collection = collectionName && prevState[collectionName];
+
+					const {rooms} = prevState;
+					switch (collectionName) {
+
+						default:
+							collection.push(object);
+							break;
+					}
+
+				if (collectionName === 'rooms') {
+					return ({
+						load_indicator: true,
+						rooms: collection
+					})
+				} else {
+					prevState.rooms[selectedRoomIndex] = selectedRoom;
+					return ({
+						load_indicator: true,
+						rooms: [...prevState.rooms]
+					})
+				}
+			}, () => {
+				if (collectionName && collection) {
+					if (updateRemote) {
+						dbUpdateOne(collectionName, object.id, {...object})
+							.then(() => {
+								this.setState(prevState => ({
+									load_indicator: false,
+								}))
+							})
+							.catch(err => {
+								this.setState({
+									load_indicator: false,
+								})
+							})
+					}
+				}
+			})
+		};
+
+
 		this.state = {
 			load_indicator: true,
 			rooms: [],
 			bookings: [],
 			addRoom: this.addRoom,
 			editRoom: this.editRoom,
-			addObject: this.addObject,
+			addObject: this.addRoom,
 			alert: {
 				display: false,
 				announcement: ''
 			}
-		};
+		}
 	}
 
 	/**
@@ -134,7 +156,7 @@ export class Booking extends React.Component {
 				alert: {
 					display: true,
 					announcement: `Error: ${err.announcement}`}
-			}, this.dismissNotification)
+			})
 		})
 	}
 
@@ -154,33 +176,33 @@ export class Booking extends React.Component {
 	 */
 	collectInformation = (information) => {
 		const formattedCollection = information.trim().toLowerCase();
-		return db.collection(information).get().then(querySnapshot => {
-			let data = querySnapshot.docs.map(doc => doc.data());
-			this.setState(prevState => {
-				data = data.map(object => {
-					switch (formattedCollection) {
-						case 'rooms':
-							object = new Room(object._fullName, object._emailAddress, object._phoneNumber, object._roomTypeSelection, object._adultNumber, object._checkinDate, object.checkoutDate, object._childNumber, object._id, object._createOrder, object._updateOrder);
-							break;
+		//const db = firebase.firestore();
+		let data = dbReadAll("rooms")
+			.then( (items) => {
+				this.setState(prevState => {
+					let objects = [];
 
-						default:
-							break;
-					}
-					return object;
-				});
+					items.forEach(element => {
+						objects.push(
+							new Room(element._fullName, element._emailAddress, element._phoneNumber, element._roomTypeSelection,
+								element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id,
+								element._createOrder, element._updateOrder)
+						);
+					});
 
-				return ({
-					load_indicator: false,
-					[information]: [...data]})
-			}, () => {
+					return ({
+						load_indicator: false,
+						[information]: [...objects]})
+				}, () => {
+				})
 			})
-		})
 			.catch(e => {
 				this.setState({
 					load_indicator: false}, () => {
 					console.dir(e);
 				})
-			})
+			});
+
 	};
 
 	render() {
