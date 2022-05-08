@@ -26,6 +26,7 @@ export const OrderNumberID = props => {
 
   return (
 	<Container>
+		bookings.id
 	  {alert.display ? (
 		  <Alert display={alert.display} announcement={alert.announcement}/>) : ''}
 	  {room ? (

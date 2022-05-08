@@ -55,7 +55,7 @@ export class Booking extends React.Component {
 									load_indicator: false,
 								})
 							})
-							.catch((err) => {
+							.catch(() => {
 								this.setState({
 									load_indicator: false,
 								})
@@ -85,15 +85,12 @@ export class Booking extends React.Component {
 			let selectedRoom, selectedRoomIndex;
 			this.setState(prevState => {
 				collection = collectionName && prevState[collectionName];
-
 					const {rooms} = prevState;
 					switch (collectionName) {
-
 						default:
 							collection.push(object);
 							break;
 					}
-
 				if (collectionName === 'rooms') {
 					return ({
 						load_indicator: true,

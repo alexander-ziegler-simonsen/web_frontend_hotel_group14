@@ -8,6 +8,7 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {Formik} from "formik";
 import * as yup from "yup";
 import './Style.css';
+import roomData from "../../roomData";
 
 /**
  * Author: Azmi Uslu (s185736)
@@ -24,13 +25,19 @@ const formValidation = yup.object().shape({
       .length(8, '8 numbers are required (danish number)')
       .matches(/^[0-9\b]+$/, 'Only numbers are valid')
       .required('This field is required'),
-  roomTypeSelection: yup.string().trim().required('This field is required'),
+  roomTypeSelection: yup.string().required('This field is required'),
   checkinDate: yup.date().required('This field is required'),
   checkoutDate: yup.date().required('This field is required'),
   adultNumber: yup.number().required('This field is required'),
   childNumber: yup.number(),
 });
 
+{/*roomTypeSelection: yup.array().of(yup.object({
+      budgetRoom: yup.boolean().string("Budget Room"),
+      standardRoom: yup.boolean().string("Standard Room"),
+      businessRoom: yup.boolean().string("Business Room"),
+      luxuryRoom: yup.boolean().string("Luxury Room")
+  })),*/}
 /**
  * Type: This is where the customers can get the chance to add and edit.
  * @property type - will either add or edit.
@@ -167,25 +174,6 @@ export const RoomForm = props => {
 				  </Form.Row>
 
                     <Form.Row className="mb-lg-3">
-                        <Form.Group as={Col} controlId="roomTypeSelection" lg="4" md="12">
-                            <Form.Label>Room Type:<span className="text-danger">*</span></Form.Label>
-                            <Form.Control
-                                ref={manufacturerInputRef}
-                                onChange={handleChange}
-                                name="roomTypeSelection"
-                                value={values.roomTypeSelection}
-                                type="text"
-                                placeholder="Type your desired room..."
-                                isInvalid={!!errors.roomTypeSelection}
-                                isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.roomTypeSelection}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Row className="mb-lg-3">
                         <Form.Group as={Col} controlId="checkinDate" lg="6" md="12">
                             <Form.Label>Check-in Date:<span
                                 className="text-danger">*</span></Form.Label>
@@ -217,6 +205,26 @@ export const RoomForm = props => {
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.checkoutDate}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+
+
+                    <Form.Row className="mb-lg-3">
+                        <Form.Group as={Col} controlId="roomTypeSelection" lg="4" md="12">
+                            <Form.Label>Room Type:<span className="text-danger">*</span></Form.Label>
+                            <Form.Control
+                                ref={manufacturerInputRef}
+                                onChange={handleChange}
+                                name="roomTypeSelection"
+                                value={values.roomTypeSelection}
+                                type="text"
+                                placeholder="Type desired Room..."
+                                isInvalid={!!errors.roomTypeSelection}
+                                isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.roomTypeSelection}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Form.Row>
