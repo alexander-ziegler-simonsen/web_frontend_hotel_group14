@@ -3,7 +3,7 @@ import {
   Link
 } from "react-router-dom";
 import Picture from './Picture.js'
-import { budget, standard, business, luxury } from '../RoomPage/RoomPage.js'
+import { budget, standard, business, luxury } from '../roomPage/RoomPage.js'
 
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";

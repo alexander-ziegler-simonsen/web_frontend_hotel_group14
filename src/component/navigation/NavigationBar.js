@@ -8,7 +8,7 @@ import {
     Link,
 } from "react-router-dom";
 
-import RoomPage from "../RoomPage/RoomPage";
+import RoomPage from "../roomPage/RoomPage";
 import {Booking} from '../../page/Booking';
 import { useState } from "react";
 import { useEffect } from "react";
