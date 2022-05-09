@@ -32,17 +32,6 @@ const formValidation = yup.object().shape({
   childNumber: yup.number(),
 });
 
-const options = [
-    { label: 'Fruit', value: 'fruit' },
-    { label: 'Vegetable', value: 'vegetable' },
-    { label: 'Meat', value: 'meat' },
-];
-{/*roomTypeSelection: yup.array().of(yup.object({
-      budgetRoom: yup.boolean().string("Budget Room"),
-      standardRoom: yup.boolean().string("Standard Room"),
-      businessRoom: yup.boolean().string("Business Room"),
-      luxuryRoom: yup.boolean().string("Luxury Room")
-  })),*/}
 /**
  * Type: This is where the customers can get the chance to add and edit.
  * @property type - will either add or edit.
@@ -187,7 +176,7 @@ export const RoomForm = props => {
                                 name="roomTypeSelection"
                                 value={values.roomTypeSelection}
                                 type="text"
-                                placeholder="'Budget', 'Standard, 'Business', 'Luxury'"
+                                placeholder="'Budget', 'Standard', 'Business', 'Luxury'"
                                 isInvalid={!!errors.roomTypeSelection}
                                 isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
                             />
