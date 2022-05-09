@@ -1,16 +1,16 @@
 import React from 'react';
-import {OrderSummary} from "../component/orderSummary/OrderSummary";
+import {OrderSummary} from "../orderSummary/OrderSummary";
 import {Route, Switch} from 'react-router-dom';
-import {AddRoom} from "../component/addRoom/AddRoom";
+import {AddRoom} from "../addRoom/AddRoom";
 // import {firebase} from "../../customFirebase/custom_Firebase";
-import {AppProvider} from "../AppContext/AppContext";
-import {EditRoom} from "../component/editRoom/EditRoom";
-import {OrderNumberID} from "../component/bookingMisc/OrderNumberID";
-import {Room} from "../models/Room";
+import {AppProvider} from "../../AppContext/AppContext";
+import {EditRoom} from "../editRoom/EditRoom";
+import {OrderNumberID} from "../bookingMisc/OrderNumberID";
+import {Room} from "../../models/Room";
 //import {getDatabase} from "firebase/empty-import";
 //import { getDatabase, ref, set } from "firebase/database";
 
-import {dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne} from "../component/dbHelper";
+import {dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne} from "../dbHelper";
 
 /**
  * Author: Azmi Uslu (s185736)
