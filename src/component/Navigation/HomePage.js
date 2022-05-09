@@ -12,7 +12,7 @@ import "react-simple-flex-grid/lib/main.css";
  * Author: Sammy Chauhan (s191181)
  **/
 
-function HomePage(props) {
+function HomePage() {
   return (
     <div className="rooms">
       <Row>
