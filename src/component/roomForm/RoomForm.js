@@ -32,6 +32,11 @@ const formValidation = yup.object().shape({
   childNumber: yup.number(),
 });
 
+const options = [
+    { label: 'Fruit', value: 'fruit' },
+    { label: 'Vegetable', value: 'vegetable' },
+    { label: 'Meat', value: 'meat' },
+];
 {/*roomTypeSelection: yup.array().of(yup.object({
       budgetRoom: yup.boolean().string("Budget Room"),
       standardRoom: yup.boolean().string("Standard Room"),
@@ -174,6 +179,25 @@ export const RoomForm = props => {
 				  </Form.Row>
 
                     <Form.Row className="mb-lg-3">
+                        <Form.Group as={Col} controlId="roomTypeSelection" lg="4" md="12">
+                            <Form.Label>Room Type:<span className="text-danger">*</span></Form.Label>
+                            <Form.Control
+                                ref={manufacturerInputRef}
+                                onChange={handleChange}
+                                name="roomTypeSelection"
+                                value={values.roomTypeSelection}
+                                type="text"
+                                placeholder="'Budget', 'Standard, 'Business', 'Luxury'"
+                                isInvalid={!!errors.roomTypeSelection}
+                                isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.roomTypeSelection}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Row className="mb-lg-3">
                         <Form.Group as={Col} controlId="checkinDate" lg="6" md="12">
                             <Form.Label>Check-in Date:<span
                                 className="text-danger">*</span></Form.Label>
@@ -205,26 +229,6 @@ export const RoomForm = props => {
                             />
                             <Form.Control.Feedback type="invalid">
                                 {errors.checkoutDate}
-                            </Form.Control.Feedback>
-                        </Form.Group>
-                    </Form.Row>
-
-
-                    <Form.Row className="mb-lg-3">
-                        <Form.Group as={Col} controlId="roomTypeSelection" lg="4" md="12">
-                            <Form.Label>Room Type:<span className="text-danger">*</span></Form.Label>
-                            <Form.Control
-                                ref={manufacturerInputRef}
-                                onChange={handleChange}
-                                name="roomTypeSelection"
-                                value={values.roomTypeSelection}
-                                type="text"
-                                placeholder="Type desired Room..."
-                                isInvalid={!!errors.roomTypeSelection}
-                                isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {errors.roomTypeSelection}
                             </Form.Control.Feedback>
                         </Form.Group>
                     </Form.Row>

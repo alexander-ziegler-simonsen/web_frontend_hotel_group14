@@ -81,7 +81,6 @@ export class Booking extends React.Component {
 					}
 				  }, () => {
 					this.dismissNotification();
-					// console.log(err);
 				  })
 			})
 		  }
@@ -125,7 +124,6 @@ export class Booking extends React.Component {
 			}
 		  })
 		} else {
-		  const {rooms} = prevState;
 		  switch (collectionName) {
 
 			default:
@@ -151,7 +149,7 @@ export class Booking extends React.Component {
 		  if (updateRemote) {
 			dbUpdateOne(collectionName, object.id, {...object})
 			.then(() => {
-				this.setState(prevState => ({
+				this.setState(() => ({
 					load_indicator: false,
 					alert: {
 					  display: true,
@@ -201,7 +199,7 @@ export class Booking extends React.Component {
   componentDidMount() {
 	this
 	  .collectInformations('rooms', 'bookings')
-	  .then(values => {
+	  .then(() => {
 		this.setState(prevState => {
 			const {bookings, rooms} = prevState;
 			rooms.forEach(v => {
@@ -231,36 +229,31 @@ export class Booking extends React.Component {
 	 * @returns {Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>>}
 	 */
   collectInformation = (information) => {
-	const formattedCollection = information.trim().toLowerCase();
-	//const db = firebase.firestore();
+	  dbReadAll("rooms")
+		  .then( (items) => {
+			  this.setState(() => {
+				  let objects = [];
+				  items.forEach(element => {
+					  objects.push(
+						  new Room(element._fullName, element._emailAddress, element._phoneNumber, element._roomTypeSelection,
+							  element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id, element._createOrder));
+				  });
 
-	let data = dbReadAll("rooms")
-	.then( (items) => {
-		this.setState(prevState => {
-			let objects = [];
-			
-			items.forEach(element => {
-				objects.push(
-					new Room(element._fullName, element._emailAddress, element._phoneNumber, element._roomTypeSelection, 
-					element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id, element._createOrder));
-			});
-
-		  return ({
-			load_indicator: false,
-			[information]: [...objects]})
-		}, () => {
-		})
-	})
-	.catch(e => {
-		this.setState({
-			load_indicator: false}, () => {
-			console.dir(e);
-		})
-	});
-
+				  return ({
+					  load_indicator: false,
+					  [information]: [...objects]})
+			  }, () => {
+			  })
+		  })
+		  .catch(e => {
+			  this.setState({
+				  load_indicator: false}, () => {
+				  console.dir(e);
+			  })
+		  });
   };
 
-  render() {
+	render() {
 	return (
 	  <AppProvider value={this.state}>
 		<Switch>
