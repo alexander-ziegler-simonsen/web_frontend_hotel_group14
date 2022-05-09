@@ -25,7 +25,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-console.log(db)
+// console.log(db)
 
 export async function dbReadAll(tableName){
     // TODO: maybe just load this into the redux store, or return as a list of json objs

@@ -7,11 +7,37 @@ import Button from "react-bootstrap/Button";
 //import Stack from "react-bootstrap/Stack";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import {AppContext} from "../AppContext/AppContext";
+import { useContext } from "react";
+
 
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
 
 function LoginPage(props) {
+    const {sharedInfo} = useContext(AppContext);
+
+    const styles = {
+        formBtn: {
+            fontWeight: "bold", 
+            fontSize: 19,
+           
+            textAlign: "center",
+            minWidth: 200,
+            marginTop: 20
+
+        },
+        btnHolder: {
+            
+            float: "left",
+            marginLeft: "45%",
+            marginRight: "55%",
+            textAlign: "center",
+            marginTop: 10,
+            marginBottom: 10
+        }
+    }
+
     // https://react-bootstrap.github.io/components/modal/
     // https://reactjs.org/docs/hooks-state.html 
 
@@ -20,15 +46,27 @@ function LoginPage(props) {
     const [showPass, setPass] = useState(false);
     const [showNew, setNew] = useState(false);
 
-    return (
+
+    // this will be showed if the user have logged in 
+    if(sharedInfo !== undefined) {
+        return (
+        <div>
+            <h1>Hello {props.userName}</h1>
+            <Button style={styles.formBtn} onClick={() => console.log("text")}>logout</Button>
+        </div>
+        )
+    }
+    else // this will be showed if the user is not logged in
+    {
+        return (
         <div>
             pick one of the 3 options, then a form will come up.
 
-            {/*<Stack direction="horizontal" gap={5}>*/}
-                <Button onClick={() => setLogin(!showLogin)}>login</Button>
-                <Button onClick={() => setPass(!showPass)}>forgot password</Button>
-                <Button onClick={() => setNew(!showNew)}>make new user</Button>
-            {/*</Stack>*/}
+            <div style={styles.btnHolder}>
+                <Button style={styles.formBtn} onClick={() => setLogin(!showLogin)}>login</Button>
+                <Button style={styles.formBtn} onClick={() => setPass(!showPass)}>forgot password</Button>
+                <Button style={styles.formBtn} onClick={() => setNew(!showNew)}>make new user</Button>
+            </div>
 
             {/* login */}
             <Modal variant="primary" show={showLogin} onHide={() => {setLogin(!showLogin)}}>
@@ -56,7 +94,7 @@ function LoginPage(props) {
                 </Modal.Footer>
             </Modal>
 
-            {/* forgot password */}
+            {/* new password */}
             <Modal variant="primary" show={showNew} onHide={() => setNew(!showNew)}>
                 <Modal.Header closeButton>
                     <Modal.Title>new user popup</Modal.Title>
@@ -69,7 +107,8 @@ function LoginPage(props) {
                 </Modal.Footer>
             </Modal>
         </div>
-    )
+        )
+    }
 }
 
 export default LoginPage;
