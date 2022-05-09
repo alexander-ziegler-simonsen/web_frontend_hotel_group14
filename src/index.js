@@ -37,9 +37,9 @@ console.log(db)
 */
 
 ReactDOM.render(
-    <BrowserRouter basename="/asa">
+    <HashRouter basename="/asa">
         <App/>
-    </BrowserRouter>
+    </HashRouter>
     ,
     document.getElementById('root'));
 
