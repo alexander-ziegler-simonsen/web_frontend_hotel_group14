@@ -7,15 +7,23 @@ import Button from "react-bootstrap/Button";
 //import Stack from "react-bootstrap/Stack";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import {AppContext} from "../AppContext/AppContext";
+
 import { useContext } from "react";
+import { useEffect } from "react";
 
 
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
 
 function LoginPage(props) {
-    const {sharedInfo} = useContext(AppContext);
+    const [sharedInfo, setSharedInfo] = useState("");
+
+    useEffect(() => {
+        let res = localStorage.getItem("sharedInfo");
+        if(res){
+            setSharedInfo(res);
+        }
+    }, [])
 
     const styles = {
         formBtn: {
@@ -48,11 +56,15 @@ function LoginPage(props) {
 
 
     // this will be showed if the user have logged in 
-    if(sharedInfo !== undefined) {
+    if(sharedInfo.length > 0) {
         return (
         <div>
-            <h1>Hello {props.userName}</h1>
-            <Button style={styles.formBtn} onClick={() => console.log("text")}>logout</Button>
+            <h1>Hello {localStorage.getItem("sharedInfo")}</h1>
+            <Button style={styles.formBtn} onClick={() => {
+                localStorage.removeItem("sharedInfo");
+                props.setNavbarSharedInfo("");
+                setSharedInfo("");
+            }}>logout</Button>
         </div>
         )
     }
@@ -64,7 +76,7 @@ function LoginPage(props) {
 
             <div style={styles.btnHolder}>
                 <Button style={styles.formBtn} onClick={() => setLogin(!showLogin)}>login</Button>
-                <Button style={styles.formBtn} onClick={() => setPass(!showPass)}>forgot password</Button>
+                {/* <Button style={styles.formBtn} onClick={() => setPass(!showPass)}>forgot password</Button> */}
                 <Button style={styles.formBtn} onClick={() => setNew(!showNew)}>make new user</Button>
             </div>
 
@@ -74,7 +86,12 @@ function LoginPage(props) {
                     <Modal.Title>Login popup</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <LoginForm />
+                    <LoginForm onLoginSuccess={(res) => {
+                        localStorage.setItem("sharedInfo", res)
+                        props.setNavbarSharedInfo(res);
+                        setSharedInfo(res);
+                        setLogin(false)
+                    }}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => setLogin(!showLogin)}>close window</Button>
@@ -82,7 +99,7 @@ function LoginPage(props) {
             </Modal>
 
             {/* forgot password */}
-            <Modal variant="primary" show={showPass} onHide={() => setPass(!showPass)}>
+            {/* <Modal variant="primary" show={showPass} onHide={() => setPass(!showPass)}>
                 <Modal.Header closeButton>
                     <Modal.Title>forgot password popup</Modal.Title>
                 </Modal.Header>
@@ -92,15 +109,17 @@ function LoginPage(props) {
                 <Modal.Footer>
                     <Button onClick={() => setPass(!showPass)}>close window</Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
 
-            {/* new password */}
+            {/* new user */}
             <Modal variant="primary" show={showNew} onHide={() => setNew(!showNew)}>
                 <Modal.Header closeButton>
                     <Modal.Title>new user popup</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <NewUserForm />
+                    <NewUserForm closeModal={() => {
+                        setNew(false)
+                    }} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => setNew(!showNew)}>close window</Button>

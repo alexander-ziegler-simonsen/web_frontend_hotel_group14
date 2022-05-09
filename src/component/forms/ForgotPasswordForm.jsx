@@ -34,7 +34,7 @@ function ForgotPasswordForm(props) {
                             </Form.Text>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" onClick={() => {
+                        <Button variant="primary" onClick={() => {
                             const auth = getAuth();
                             auth().sendPasswordResetEmail(auth, email)
                             .then((e) => {console.log("it worked", e)})

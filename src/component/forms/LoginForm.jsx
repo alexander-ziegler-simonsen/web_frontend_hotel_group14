@@ -37,15 +37,12 @@ function LoginForm(props) {
                             <Form.Control value={password} onChange={(v) => setPassword(v.target.value)} type="password" placeholder="Password" />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" onClick={() => {
-                            console.log("testing testing Ziegler");
+                        <Button disabled={email.length<1 || password.length<1} variant="primary" onClick={() => {
                             const auth = getAuth();
                             signInWithEmailAndPassword(auth, email, password)
                             .then((userCredential) => {
                                 const user = userCredential.user;
-                                alert("ziegler");
-                                alert(user);
-                                console.log("ziegler user", user);
+                                props.onLoginSuccess(user.email);
                             })
                             .catch((err) => {
                                 const errorCode = err.code;
@@ -55,7 +52,7 @@ function LoginForm(props) {
                             });
 
                         }} style={{marginRight: "10px"}}>Login</Button>
-                        <Button variant="secondary" type="submit">forgot password</Button>
+                        {/* <Button variant="secondary">forgot password</Button> */}
                     </Form>
                 </Col>
             </Row>

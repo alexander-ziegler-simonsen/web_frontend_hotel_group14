@@ -10,6 +10,8 @@ import {
 
 import RoomPage from "../RoomPage/RoomPage";
 import {Booking} from '../../component/booking/Booking';
+import { useState } from "react";
+import { useEffect } from "react";
 import LoginPage from "../../page/LoginPage";
 import RoomOverview from "../../page/RoomOverview";
 // css styling fra https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_right
@@ -25,6 +27,15 @@ import './NavigationBar.css';
 //npm install react-router-dom@5.2.0
 
 function NavigationBar() {
+    const [sharedInfo, setSharedInfo] = useState("");
+
+    useEffect(() => {
+        let res = localStorage.getItem("sharedInfo");
+        if(res){
+            setSharedInfo(res);
+        }
+    }, [])
+
     return (
         <Router>
             <div style={{ backgroundColor: "silver" }}>
@@ -51,7 +62,7 @@ function NavigationBar() {
                                 <Link to="/booking">Booking Portal</Link>
                             </li>
                             <li className="body-login">
-                                <Link to="/forms">Login</Link>
+                                <Link to="/forms"> {sharedInfo.length > 1 ? "Account" : "Login"} </Link>
                             </li>
                         </ul>
                     </div>
@@ -86,7 +97,9 @@ function NavigationBar() {
                     </Route>
                     <Route path={"/forms"}>
                         <h2>Forms</h2>
-                        <LoginPage />
+                        <LoginPage setNavbarSharedInfo={(info) => {
+                            setSharedInfo(info);
+                        }} />
                     </Route>
 
                     <Route path={"/"}>

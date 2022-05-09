@@ -73,25 +73,19 @@ function NewUserForm(props) {
                             <Form.Check type="switch" label="Attack Helicopter" />
                         </Form.Group>
 
-                        <Button variant="primary" controlId="submitBtn" onClick={() => {
+                        <Button disabled={email.legnth<1||password.length<1} variant="primary" onClick={async () => {
                             const auth = getAuth();
-                            createUserWithEmailAndPassword(auth, email, password)
-                            .then((userCredential) => {
-                                const uid = userCredential.user.uid;
-                                
-                                dbCreateOneWithId("user", {
-                                    name: name,
-                                    phone: phone,
-                                    email: email,
-                                }, uid).then(() => {console.log("it works")}).catch((err) => {console.log("it does not work" , err)});
+                            let userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-                            })
-                            .catch((err) => {
-                                const errorCode = err.code;
-                                const errorMess = err.message;
-                                console.log("ziegler errr:", errorCode, errorMess);
-                            });
-                        }} type="submit">Make new user</Button>
+                            const uid = userCredential.user.uid;
+                            await dbCreateOneWithId("user", {
+                                name: name,
+                                phone: phone,
+                                email: email,
+                            }, uid);
+
+                            props.closeModal();
+                        }}>Make new user</Button>
                     </Form>
                 </Col>
             </Row>
