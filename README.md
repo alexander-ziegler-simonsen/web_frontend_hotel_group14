@@ -7,7 +7,7 @@
     For the course 02363 Front End Web Technology Spring we are developing a Web-Application, which is written in React.js and NodeJS.
     <br />
     <br />
-    <a href="#">View Demo</a>
+    <a href="https://hotel-website-30596.web.app/">View Demo</a>
     -
     <a href="https://github.com/repeller/web_frontend_hotel_group14">Repository</a>
   </p>
