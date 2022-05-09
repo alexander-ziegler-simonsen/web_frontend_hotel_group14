@@ -3,12 +3,20 @@ import './RoomPage.css'
 import roomData from '../../roomData';
 import React, { Component } from 'react';
 import { Route, Routes } from "react-router-dom";
+import { dbReadAll2, dbReadOne, dbReadAll } from "../dbHelper";
+
 
 /**
  * Author: Sammy Chauhan (S191181)
  **/
 
 function RoomPage() {
+  let output = dbReadOne('room_type', 'El5P83LkQb5EIYseELTP').then((v) => {
+    console.log("testing one", v);
+    //ljndkcnlscnlsdnclskcd
+  }).catch((err) => {
+    console.log(err);
+  });
   return (
     <div className="Rooms">
 
@@ -72,5 +80,28 @@ export const luxury = {
     width: 600
   }
 }
+
+//dbReadAll2('room_type')
+/*
+let output = dbReadOne('room_type', 'El5P83LkQb5EIYseELTP').then((v) => { 
+  console.log("testing one", v);
+//ljndkcnlscnlsdnclskcd
+ }).catch((err) => { 
+   console.log(err);
+   });
+   */
+
+
+
+
+let test = dbReadAll("room_type").then((v) => {
+  console.log("testing", v);
+
+}).catch((err) => {
+  console.log("error", err);
+
+});
+
+
 
 export default RoomPage;
