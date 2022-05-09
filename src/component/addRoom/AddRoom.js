@@ -12,7 +12,7 @@ import moment from "moment";
  **/
 
 export const AddRoom = () => {
-  const {addObject} = useContext(AppContext);
+  const {addRoom} = useContext(AppContext);
   const  history = useHistory();
 
   return (
@@ -42,7 +42,7 @@ export const AddRoom = () => {
 			.then(() => {console.log("room was added to firestore")})
 			.catch((err) => {console.log("room added error:", err)});
 			
-			addObject('room', roomToBeAdded);
+			addRoom('room', roomToBeAdded);
 			history.push(`/booking/goto/${roomToBeAdded.id}`);
 
 			

@@ -43,7 +43,7 @@ const formValidation = yup.object().shape({
 
 export const RoomForm = props => {
   const {load_indicator, alert} = useContext(AppContext);
-  const  history = useHistory();
+  const history = useHistory();
   const inputRef = useRef(null);
   let {room, handleSubmit, type} = props;
 

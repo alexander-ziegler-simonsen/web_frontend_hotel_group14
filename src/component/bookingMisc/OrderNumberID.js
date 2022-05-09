@@ -16,13 +16,10 @@ import './Style.css';
 
 export const OrderNumberID = props => {
   const  history = useHistory();
-  const {rooms, bookings, load_indicator, alert
+  const {rooms, load_indicator, alert
   } = useContext(AppContext);
-  let room, roomBookings;
+  let room;
   room = rooms.find(v => v.id === props.match.params.roomID);
-  if (room) {
-	roomBookings = bookings.filter(b => b.roomID === room.id);
-  }
 
   return (
 	<Container>
@@ -47,7 +44,6 @@ export const OrderNumberID = props => {
 				  :
 				  <RoomDetails
 					room={room}
-					bookings={roomBookings}
 				  />
 			  }
 			</>

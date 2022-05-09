@@ -2,13 +2,10 @@ import React from 'react';
 import { OrderSummary } from "../component/orderSummary/OrderSummary";
 import { Route, Switch } from 'react-router-dom';
 import { AddRoom } from "../component/addRoom/AddRoom";
-// import {firebase} from "../../customFirebase/custom_Firebase";
 import { AppProvider } from "../AppContext/AppContext";
 import { EditRoom } from "../component/editRoom/EditRoom";
 import { OrderNumberID } from "../component/bookingMisc/OrderNumberID";
 import { Room } from "../models/Room";
-//import {getDatabase} from "firebase/empty-import";
-//import { getDatabase, ref, set } from "firebase/database";
 
 import { dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne } from "../component/dbHelper";
 
@@ -20,7 +17,7 @@ import { dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne } from "../component/d
 export class Booking extends React.Component {
 	constructor(props) {
 		super(props);
-		this.dismissNotification = () => {
+		this.rejectAlert = () => {
 			setTimeout(() => {
 				this.setState({
 					alert: {
@@ -70,7 +67,7 @@ export class Booking extends React.Component {
 										display: true,
 										announcement: `Successfully: Room has been now updated.`
 									}
-								}, this.dismissNotification)
+								}, this.rejectAlert)
 							})
 							.catch((err) => {
 								this.setState({
@@ -80,8 +77,7 @@ export class Booking extends React.Component {
 										announcement: `Error (${err}): Room couldn't be edited.`
 									}
 								}, () => {
-									this.dismissNotification();
-									// console.log(err);
+									this.rejectAlert();
 								})
 							})
 					}
@@ -91,22 +87,22 @@ export class Booking extends React.Component {
 
 		/**
 		 *
-		 * @param objectType - The room type.
-		 * @param object
-		 * @param refreshRemoteD - this is not obligatory, you'll have the opportunity to get updated the database remote.
+		 * @param roomType
+		 * @param room
+		 * @param updateRemote
 		 */
-		this.addObject = (objectType, object, updateRemote = true) => {
-			if (!objectType || !object) {
+		this.addRoom = (roomType, room, updateRemote = true) => {
+			if (!roomType || !room) {
 				return this.setState({
 					alert: {
 						display: true,
-						announcement: 'Error: Something is missing (either the object or its type).'
+						announcement: 'Error: Something is missing (either the room or its type).'
 					}
-				}, this.dismissNotification)
+				}, this.rejectAlert)
 			}
 			let collectionName, collection;
 
-			switch (objectType.trim().toLowerCase()) {
+			switch (roomType.trim().toLowerCase()) {
 				case 'room':
 					collectionName = 'rooms';
 					break;
@@ -121,15 +117,13 @@ export class Booking extends React.Component {
 					return ({
 						alert: {
 							display: true,
-							announcement: 'Error: The given object type is not valid.'
+							announcement: 'Error: The given room type is not valid.'
 						}
 					})
 				} else {
-					const { rooms } = prevState;
 					switch (collectionName) {
-
 						default:
-							collection.push(object);
+							collection.push(room);
 							break;
 					}
 				}
@@ -149,24 +143,24 @@ export class Booking extends React.Component {
 			}, () => {
 				if (collectionName && collection) {
 					if (updateRemote) {
-						dbUpdateOne(collectionName, object.id, { ...object })
+						dbUpdateOne(collectionName, room.id, { ...room })
 							.then(() => {
-								this.setState(prevState => ({
+								this.setState(() => ({
 									load_indicator: false,
 									alert: {
 										display: true,
-										announcement: `Successfully: ${objectType} is added and is now on the System.`
+										announcement: `Successfully: ${roomType} is added and is now on the System.`
 									}
-								}), this.dismissNotification)
+								}), this.rejectAlert)
 							})
 							.catch(err => {
 								this.setState({
 									load_indicator: false,
 									alert: {
 										display: true,
-										announcement: `Error (${err.announcement}): ${objectType} Couldn't be added.`
+										announcement: `Error (${err.announcement}): ${roomType} Couldn't be added.`
 									}
-								}, this.dismissNotification)
+								}, this.rejectAlert)
 							})
 					}
 				} else {
@@ -187,7 +181,6 @@ export class Booking extends React.Component {
 			bookings: [],
 			addRoom: this.addRoom,
 			editRoom: this.editRoom,
-			addObject: this.addObject,
 			alert: {
 				display: false,
 				announcement: ''
@@ -200,8 +193,8 @@ export class Booking extends React.Component {
 	* */
 	componentDidMount() {
 		this
-			.collectInformations('rooms', 'bookings')
-			.then(values => {
+			.collectInformations('rooms')
+			.then(() => {
 				this.setState(prevState => {
 					const { bookings, rooms } = prevState;
 					rooms.forEach(v => {
@@ -215,7 +208,7 @@ export class Booking extends React.Component {
 						display: true,
 						announcement: `Error: ${err.announcement}`
 					}
-				}, this.dismissNotification)
+				}, this.rejectAlert)
 			})
 	}
 
@@ -234,23 +227,18 @@ export class Booking extends React.Component {
 	 * @returns {Promise<firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>>}
 	 */
 	collectInformation = (information) => {
-		const formattedCollection = information.trim().toLowerCase();
-		//const db = firebase.firestore();
-
-		let data = dbReadAll("rooms")
+		dbReadAll("rooms")
 			.then((items) => {
-				this.setState(prevState => {
-					let objects = [];
-
+				this.setState(() => {
+					let bookings = [];
 					items.forEach(element => {
-						objects.push(
+						bookings.push(
 							new Room(element._fullName, element._emailAddress, element._phoneNumber, element._roomTypeSelection,
 								element._adultNumber, element._checkinDate, element.checkoutDate, element._childNumber, element._id, element._createOrder));
 					});
-
 					return ({
 						load_indicator: false,
-						[information]: [...objects]
+						[information]: [...bookings]
 					})
 				}, () => {
 				})
@@ -262,7 +250,6 @@ export class Booking extends React.Component {
 					console.dir(e);
 				})
 			});
-
 	};
 
 	render() {
