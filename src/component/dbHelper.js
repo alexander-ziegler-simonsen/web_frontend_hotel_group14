@@ -1,7 +1,9 @@
 import { initializeApp } from "firebase/app"; // firebase
-import { collection, getDocs, setDoc, addDoc, doc, deleteDoc, updateDoc, getFirestore } from "firebase/firestore";
+import { collection, getDocs, setDoc, addDoc, getDoc, doc, deleteDoc, updateDoc, getFirestore, onSnapshot } from "firebase/firestore";
 // THIS FILE IS MADE BY:
 // Alexander Ziegler, S181100
+// Minor edits by:
+// Sammy Chauhan, s191181
 
 // this is not a component
 
@@ -11,53 +13,61 @@ import { collection, getDocs, setDoc, addDoc, doc, deleteDoc, updateDoc, getFire
 // delete: https://youtu.be/s1frrNxq4js
 // update: https://youtu.be/Przhgs-GJ2s
 
+
 // firebase
 const keys = require('../firebaseKey.json');
 const firebaseConfig = {
-  apiKey: keys.apiKey,
-  authDomain: keys.authDomain,
-  projectId: keys.projectId,
-  storageBucket: keys.storageBucket,
-  messagingSenderId: keys.messagingSenderId,
-  appId: keys.appId
+    apiKey: keys.apiKey,
+    authDomain: keys.authDomain,
+    projectId: keys.projectId,
+    storageBucket: keys.storageBucket,
+    messagingSenderId: keys.messagingSenderId,
+    appId: keys.appId
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-console.log(db)
+const db = getFirestore(app);
+// console.log(db)
 
-export async function dbReadAll(tableName){
+export async function dbReadAll(tableName) {
     // TODO: maybe just load this into the redux store, or return as a list of json objs
+
     let output = [];
+
     const resultRef = collection(db, tableName);
     const result = await (await getDocs(resultRef)).forEach(item => {
-        output.push({id: item.id, ...item.data()})
+        output.push({ id: item.id, ...item.data() })
     })
 
     //TODO: check if return gets runed, before the get is done
     return output;
 }
 
-export async function dbCreateOne(tableName, newData)
-{    
+export async function dbReadOne(tableName, itemId) {
+    const resultRef = doc(db, tableName, itemId);
+    const result = await getDoc(resultRef);
+    console.log("ziegler", result.data());
+
+    return { id: result.id, ...result.data() }
+}
+
+export async function dbCreateOne(tableName, newData) {
     const resultRef = collection(db, tableName);
     const result = await addDoc(resultRef, newData);
 }
 
-export async function dbCreateOneWithId(tableName, newData, itemId)
-{    
+export async function dbCreateOneWithId(tableName, newData, itemId) {
     const resultRef = doc(db, tableName, itemId);
     const result = await setDoc(resultRef, newData);
 }
 
-export async function dbUpdateOne(tableName, itemId, newData)
-{
+export async function dbUpdateOne(tableName, itemId, newData) {
     const resultRef = doc(db, tableName, itemId);
     const result = await updateDoc(resultRef, newData);
     // console.log("ziegler", result);
 }
 
-export async function dbDeleteOne(tableName, itemId){
+export async function dbDeleteOne(tableName, itemId) {
     const resultRef = doc(db, tableName, itemId);
     const result = await deleteDoc(resultRef).then(() => {
         console.log("item was deleted")
