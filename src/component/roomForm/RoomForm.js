@@ -44,7 +44,7 @@ const formValidation = yup.object().shape({
 export const RoomForm = props => {
   const {load_indicator, alert} = useContext(AppContext);
   const  history = useHistory();
-  const manufacturerInputRef = useRef(null);
+  const inputRef = useRef(null);
   let {room, handleSubmit, type} = props;
 
   return (
@@ -115,7 +115,7 @@ export const RoomForm = props => {
 					<Form.Group as={Col} controlId="fullName" lg="4" md="12">
 					  <Form.Label>Full Name:<span className="text-danger">*</span></Form.Label>
 					  <Form.Control
-						ref={manufacturerInputRef}
+						ref={inputRef}
 						onChange={handleChange}
 						name="fullName"
 						value={values.fullName}
@@ -170,7 +170,7 @@ export const RoomForm = props => {
                         <Form.Group as={Col} controlId="roomTypeSelection" lg="4" md="12">
                             <Form.Label>Room Type:<span className="text-danger">*</span></Form.Label>
                             <Form.Control
-                                ref={manufacturerInputRef}
+                                ref={inputRef}
                                 onChange={handleChange}
                                 name="roomTypeSelection"
                                 value={values.roomTypeSelection}
