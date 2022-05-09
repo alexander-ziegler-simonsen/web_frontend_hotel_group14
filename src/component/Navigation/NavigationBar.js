@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import RoomPage from "../RoomPage/RoomPage";
-import {Booking} from '../../component/booking/Booking';
+import { Booking } from '../../component/booking/Booking';
 import LoginPage from "../../page/LoginPage";
 import RoomOverview from "../../page/RoomOverview";
 // css styling fra https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_right
@@ -100,7 +100,7 @@ function NavigationBar() {
 
 
 function About() {
-    return <h2>About</h2>;
+    return <h2> <data></data></h2>;
 }
 
 function Users() {
