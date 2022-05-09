@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import {AppContext} from "../../AppContext/AppContext";
-import {Room} from "../models/Room";
+import {Room} from "../../models/Room";
 import {RoomForm} from "../roomForm/RoomForm";
 import {dbCreateOneWithId} from "../dbHelper";
 import moment from "moment";
