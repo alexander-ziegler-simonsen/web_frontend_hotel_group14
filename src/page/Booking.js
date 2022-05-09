@@ -88,12 +88,12 @@ export class Booking extends React.Component {
 	  })
 	};
 
-  /**
-   *
-   * @param objectType - The room type.
-   * @param object
-   * @param refreshRemoteD - this is not obligatory, you'll have the opportunity to get updated the database remote.
-   */
+	  /**
+	   *
+	   * @param objectType
+	   * @param object
+	   * @param updateRemote
+	   */
 	this.addObject = (objectType, object, updateRemote = true) => {
 	  if (!objectType || !object) {
 		return this.setState({
