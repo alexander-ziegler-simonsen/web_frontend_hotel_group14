@@ -176,7 +176,6 @@ export const RoomForm = props => {
                                 isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
                                 isInvalid={!!errors.roomTypeSelection}
                             >
-                                <option value=""/>
                                 <option value="Budget Room">
                                     Budget Room
                                 </option>
