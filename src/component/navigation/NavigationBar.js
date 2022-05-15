@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import RoomPage from "../roomPage/RoomPage";
-import {Booking} from '../booking/Booking';
+import {Booking} from '../../page/Booking';
 import { useState } from "react";
 import { useEffect } from "react";
 import LoginPage from "../../page/LoginPage";

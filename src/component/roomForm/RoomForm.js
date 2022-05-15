@@ -165,20 +165,31 @@ export const RoomForm = props => {
 					</Form.Group>
 
 				  </Form.Row>
-
                     <Form.Row className="mb-lg-3">
                         <Form.Group as={Col} controlId="roomTypeSelection" lg="4" md="12">
                             <Form.Label>Room Type:<span className="text-danger">*</span></Form.Label>
                             <Form.Control
-                                ref={inputRef}
-                                onChange={handleChange}
+                                as="select"
                                 name="roomTypeSelection"
                                 value={values.roomTypeSelection}
-                                type="text"
-                                placeholder="Type your desired room..."
-                                isInvalid={!!errors.roomTypeSelection}
+                                onChange={handleChange}
                                 isValid={touched.roomTypeSelection && !errors.roomTypeSelection}
-                            />
+                                isInvalid={!!errors.roomTypeSelection}
+                            >
+                                <option value=""/>
+                                <option value="Budget Room">
+                                    Budget Room
+                                </option>
+                                <option value="Standard Room">
+                                    Standard Room
+                                </option>
+                                <option value="Business Room">
+                                    Business Room
+                                </option>
+                                <option value="Luxury Suite">
+                                    Luxury Suite
+                                </option>
+                            </Form.Control>
                             <Form.Control.Feedback type="invalid">
                                 {errors.roomTypeSelection}
                             </Form.Control.Feedback>

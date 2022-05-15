@@ -1,13 +1,13 @@
 import React from 'react';
-import { OrderSummary } from "../orderSummary/OrderSummary";
+import { OrderSummary } from "../component/orderSummary/OrderSummary";
 import { Route, Switch } from 'react-router-dom';
-import { AddRoom } from "../addRoom/AddRoom";
-import { AppProvider } from "../../AppContext/AppContext";
-import { EditRoom } from "../editRoom/EditRoom";
-import { OrderNumberID } from "../bookingMisc/OrderNumberID";
-import { Room } from "../../models/Room";
+import { AddRoom } from "../component/addRoom/AddRoom";
+import { AppProvider } from "../AppContext/AppContext";
+import { EditRoom } from "../component/editRoom/EditRoom";
+import { OrderNumberID } from "../component/bookingMisc/OrderNumberID";
+import { Room } from "../models/Room";
 
-import { dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne } from "../dbHelper";
+import { dbCreateOne, dbReadAll, dbUpdateOne, dbDeleteOne } from "../component/dbHelper";
 
 /**
  * Author: Azmi Uslu (s185736)
