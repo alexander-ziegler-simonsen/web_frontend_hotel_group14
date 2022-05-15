@@ -24,9 +24,15 @@ const formValidation = yup.object().shape({
       .length(8, '8 numbers are required (danish number)')
       .matches(/^[0-9\b]+$/, 'Only numbers are valid')
       .required('This field is required'),
-  roomTypeSelection: yup.string().trim().required('This field is required'),
-  checkinDate: yup.date().required('This field is required'),
-  checkoutDate: yup.date().required('This field is required'),
+  roomTypeSelection: yup.string(),
+    checkinDate: yup.
+        date()
+        .min(moment().subtract(1, 'day'), 'The given date is over.')
+        .required('This field is required'),
+    checkoutDate: yup
+        .date()
+        .min(yup.ref('checkinDate'), 'Something is wrong with the dates.')
+        .required('This field is required'),
   adultNumber: yup.number().required('This field is required'),
   childNumber: yup.number(),
 });
@@ -94,7 +100,7 @@ export const RoomForm = props => {
 				fullName: room ? room.fullName : ``,
 				emailAddress: room ? room.emailAddress : ``,
 				phoneNumber: room ? room.phoneNumber : ``,
-                roomTypeSelection : room ? room.roomTypeSelection : ``,
+                roomTypeSelection : `Budget Room`, //temporary fix so
 				checkinDate: room ? room.checkinDate : ``,
                 checkoutDate: room ? room.checkoutDate : ``,
 				adultNumber: room ? room.adultNumber : ``,
